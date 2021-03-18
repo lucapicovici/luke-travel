@@ -1,0 +1,17 @@
+{
+  "name": "luke-travel",
+  "version": "1.0.0",
+  "description": "MERN app for searching hotels and booking vacations",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/server",
+    "server": "nodemon backend/server"
+  },
+  "author": "Luca Picovici",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.0"
+  }
+}
