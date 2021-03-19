@@ -1,8 +1,9 @@
 import express from 'express';
 const router = express.Router();
+import {
+  getHotels
+} from '../controllers/hotelController.js';
 
-router.route('/').get((req, res, next) => {
-  res.json('hotels route');
-})
+router.route('/').get(getHotels);
 
 export default router;
