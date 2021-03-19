@@ -1,10 +1,13 @@
 import express from 'express';
-
+import colors from 'colors';
+import { connectDB } from './models/index.js';
 
 import hotelRoutes from './routes/hotelRoutes.js';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+connectDB();
 
 app.use(express.json());
 app.use('/api/hotels', hotelRoutes);
