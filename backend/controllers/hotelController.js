@@ -8,7 +8,7 @@ const getHotels = async(req, res, next) => {
     res.status(200).json(hotels);
   } catch(err) {
     res.status(400);
-    console.error(err);
+    throw new Error('Could not get hotels');
   }
 };
 
