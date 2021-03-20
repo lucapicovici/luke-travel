@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 import colors from 'colors';
 import hotels from './data/hotels.js';
+import users from './data/users.js';
 import { 
   connectDB,
-  hotelModel as Hotel  
+  hotelModel as Hotel,
+  userModel as User
 } from './models/index.js';
 
 connectDB();
@@ -11,7 +13,18 @@ connectDB();
 const importData = async() => {
   try {
     await Hotel.deleteMany();
-    await Hotel.insertMany(hotels);
+    await User.deleteMany();
+    
+    // Incarca niste utilizatori in baza de date
+    const createdUsers = await User.insertMany(users);
+    const adminUser = createdUsers[0]._id;
+    
+    // Seteaza un admin pentru fiecare hotel
+    const sampleHotels = hotels.map(hotel => {
+      return { ...hotel, user: adminUser}
+    });
+
+    await Hotel.insertMany(sampleHotels);
 
     console.log('Data imported!'.green.inverse);
     process.exit();
@@ -24,6 +37,7 @@ const importData = async() => {
 const destroyData = async() => {
   try {
     await Hotel.deleteMany();
+    await User.deleteMany();
 
     console.log('Data destroyed!'.red.inverse);
     process.exit();

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import hotelModel from './hotelModel.js';
+import userModel from './userModel.js';
 
 mongoose.set('debug', true);
 
@@ -22,5 +23,6 @@ const connectDB = async() => {
 
 export { 
   connectDB,
-  hotelModel 
+  hotelModel,
+  userModel
 };
