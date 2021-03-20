@@ -19,7 +19,7 @@ const getHotels = asyncHandler(async(req, res) => {
  * @access        Public
  */
 const getHotelById = asyncHandler(async(req, res) => {
-  // TODO: check if valid objectId
+  // TODO-01: check if valid objectId
   const hotel = await Hotel.findById(req.params.id);
 
   if (hotel) {
