@@ -10,7 +10,7 @@ function App() {
       <Header />
       <main className='py-3'>
         <Container>
-          <Route path='/hotels' component={HotelListScreen} />
+          <Route path='/' component={HotelListScreen} />
         </Container>
       </main>
     </Router>

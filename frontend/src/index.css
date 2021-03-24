@@ -1,13 +1,64 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.hotelListRow {
+  flex-direction: column;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.hotelListCol {
+  margin: 10px 0;
+}
+
+.hotelListCard {
+  padding: 10px;
+}
+
+.hotelListCard p {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.hotelListCard .address {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;  
+}
+
+.hotelListCard .description {
+  font-size: 0.8em;
+}
+
+.hotelListCard .imgWrapper {
+  height: 200px;
+}
+
+.hotelListCard .imgWrapper img {
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.hotelListCard .rating {
+  display: inline;
+}
+
+.hotelListCard .card-title {
+  margin-bottom: 0;
+  font-size: 1.5em;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.hotelListCard .card-title:hover {
+  text-decoration: none;
+}
+
+.hotelListCard .card-title-wrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.hotelListCard .type {
+  font-size: 0.8em;
+  color: grey;
 }

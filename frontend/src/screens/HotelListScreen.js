@@ -24,9 +24,9 @@ const HotelListScreen = () => {
     ) : error ? (
       <Message variant='danger'>{error}</Message>
     ) : (
-      <Row>
+      <Row className='hotelListRow'>
         {hotels.map(hotel => (
-          <Col key={hotel._id} sm={12} md={6} lg={4} xl={3}>
+          <Col key={hotel._id} className='hotelListCol' md={12} lg={9}>
             <Hotel hotel={hotel}/>
           </Col>
         ))}
