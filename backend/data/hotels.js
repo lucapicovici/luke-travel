@@ -93,9 +93,9 @@ const hotels = [
     type: "Hotel",
     address: "68-69 Queensgate, Kensington and Chelsea, London, SW7 5JT, United Kingdom",
     images: [
-      {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/597/59761079.jpg"},
-      {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/463/46322272.jpg"},
-      {src: "https://q-cf.bstatic.com/images/hotel/max1280x900/597/59763466.jpg"}
+      {src: "/images/eden-59761079.jpg"},
+      {src: "/images/eden-46322272.jpg"},
+      {src: "/images/eden-59763466.jpg"}
     ],
     description: "The Eden Plaza Kensington offers modern rooms, each featuring an LCD TV with cable channels, and tea and coffee-making facilities. The bathrooms all feature a power shower.",
     amenities: [
@@ -116,8 +116,8 @@ const hotels = [
           "Wi-Fi",
           "Ensuite bathroom"
         ],
-        photos: [
-          {src: "https://q-cf.bstatic.com/images/hotel/max1280x900/597/59763466.jpg"}
+        images: [
+          {src: "/images/eden-59763466.jpg"}
         ],
         price: 30
       },
@@ -132,8 +132,8 @@ const hotels = [
           "Wi-Fi",
           "Ensuite bathroom"
         ],
-        photos: [
-          {src: "https://q-cf.bstatic.com/images/hotel/max1280x900/121/121557337.jpg"}
+        images: [
+          {src: "/images/eden-188428689.jpg"}
         ],
         price: 35
       },
@@ -148,8 +148,8 @@ const hotels = [
           "Wi-Fi",
           "Ensuite bathroom"
         ],
-        photos: [
-          {src: "https://q-cf.bstatic.com/images/hotel/max1280x900/188/188428274.jpg"}
+        images: [
+          {src: "/images/eden-188428274.jpg"}
         ],
         price: 40
       },
@@ -164,8 +164,8 @@ const hotels = [
           "Wi-Fi",
           "Ensuite bathroom"
         ],
-        photos: [
-          {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/188/188428202.jpg"}
+        images: [
+          {src: "/images/eden-188428202.jpg"}
         ],
         price: 40
       },
@@ -181,8 +181,8 @@ const hotels = [
           "Wi-Fi",
           "Ensuite bathroom"
         ],
-        photos: [
-          {src: "https://q-cf.bstatic.com/images/hotel/max1280x900/463/46322428.jpg"}
+        images: [
+          {src: "/images/eden-46322428.jpg"}
         ],
         price: 75
       }

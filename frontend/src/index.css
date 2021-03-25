@@ -1,3 +1,8 @@
+main {
+  min-height: 80vh;
+}
+
+/* --- Hotel List --- */
 .hotelListRow {
   flex-direction: column;
 }
@@ -61,4 +66,67 @@
 .hotelListCard .type {
   font-size: 0.8em;
   color: grey;
+}
+
+
+/* --- Hotel Screen --- */
+#hotelCarousel .carousel-item-next,
+#hotelCarousel .carousel-item-prev,
+#hotelCarousel .carousel-item.active {
+  display: flex;
+  height: 400px;
+}
+
+#hotelCarousel.carousel img {
+  height: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hotelScreenTitle {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#hotelType {
+  background-color: #c9c9c9;
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 10px;
+}
+
+#hotelName {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.hotelScreenAddress {
+  margin-bottom: 15px;
+}
+
+#roomCarousel .carousel-item-next,
+#roomCarousel .carousel-item-prev,
+#roomCarousel .carousel-item.active {
+  display: flex;
+  height: 200px;
+}
+
+#roomCarousel.carousel img {
+  height: 100%;
+  padding: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#roomToggleBtn {
+  max-width: 250px;
+  word-break: break-all;
+  font-size: 0.95em;
+}
+
+.roomDetails {
+  word-break: break-all;
+  font-size: 0.95em;
 }
