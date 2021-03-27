@@ -1,14 +1,24 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { hotelDetailsReducer, hotelListReducer } from './reducers/hotelReducer';
-import { userLoginReducer, userRegisterReducer } from './reducers/userReducer';
+import { 
+  hotelDetailsReducer, 
+  hotelListReducer 
+} from './reducers/hotelReducer';
+import { 
+  userDetailsReducer, 
+  userLoginReducer,
+  userRegisterReducer, 
+  userUpdateProfileReducer
+} from './reducers/userReducer';
 
 const reducer = combineReducers({
   hotelList: hotelListReducer,
   hotelDetails: hotelDetailsReducer,
   userLogin: userLoginReducer,
-  userRegister: userRegisterReducer
+  userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista
