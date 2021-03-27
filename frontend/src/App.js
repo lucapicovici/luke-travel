@@ -7,6 +7,7 @@ import HomeScreen from './screens/HomeScreen';
 import HotelListScreen from './screens/HotelListScreen';
 import HotelScreen from './screens/HotelScreen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/hotels' component={HotelListScreen} />
           <Route path='/hotel/:id' component={HotelScreen} />
           <Route path='/login' component={LoginScreen} />
+          <Route path='/register' component={RegisterScreen} />
         </Container>
       </main>
       <Footer />
