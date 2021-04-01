@@ -5,7 +5,8 @@ import users from './data/users.js';
 import { 
   connectDB,
   hotelModel as Hotel,
-  userModel as User
+  userModel as User,
+  orderModel as Order
 } from './models/index.js';
 
 connectDB();
@@ -14,6 +15,7 @@ const importData = async() => {
   try {
     await Hotel.deleteMany();
     await User.deleteMany();
+    await Order.deleteMany();
     
     // Incarca niste utilizatori in baza de date
     const createdUsers = await User.insertMany(users);
@@ -38,6 +40,7 @@ const destroyData = async() => {
   try {
     await Hotel.deleteMany();
     await User.deleteMany();
+    await Order.deleteMany();
 
     console.log('Data destroyed!'.red.inverse);
     process.exit();

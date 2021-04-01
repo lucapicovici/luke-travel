@@ -16,6 +16,20 @@ const reviewSchema = mongoose.Schema(
   }
 );
 
+const roomTypeSchema = mongoose.Schema(
+  {
+    name: {type: String, required: true},
+    beds: {type: String, required: true},
+    peopleCount: {type: Number, required: true, min: 0},
+    availableRooms: {type: Number, required: true, min: 0},
+    facilities: [String],
+    images: [
+        {src: {type: String, required: true}}
+    ],
+    price: {type: Number, required: true, min: 0}
+  }
+);
+
 const hotelSchema = mongoose.Schema(
   {
     user: {
@@ -57,19 +71,7 @@ const hotelSchema = mongoose.Schema(
       required: true,
       default: 0
     },
-    roomTypes: [
-      {
-        name: {type: String, required: true},
-        beds: {type: String, required: true},
-        peopleCount: {type: Number, required: true, min: 0},
-        availableRooms: {type: Number, required: true, min: 0},
-        facilities: [String],
-        images: [
-            {src: {type: String, required: true}}
-        ],
-        price: {type: Number, required: true, min: 0}
-      }
-    ]
+    roomTypes: [roomTypeSchema]
   },
   {
     timestamps: true

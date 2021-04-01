@@ -11,6 +11,11 @@ import {
   userRegisterReducer, 
   userUpdateProfileReducer
 } from './reducers/userReducer';
+import { cartReducer } from './reducers/cartReducer';
+import {
+  orderCreateReducer,
+  orderValidateReducer
+} from './reducers/orderReducer';
 
 const reducer = combineReducers({
   hotelList: hotelListReducer,
@@ -18,7 +23,10 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer
+  userUpdateProfile: userUpdateProfileReducer,
+  cart: cartReducer,
+  orderCreate: orderCreateReducer,
+  orderValidate: orderValidateReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista
@@ -26,8 +34,15 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo')) 
   : null;
 
+const cartItemFromStorage = localStorage.getItem('cartItem') 
+? JSON.parse(localStorage.getItem('cartItem')) 
+: {};
+
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage }
+  userLogin: { userInfo: userInfoFromStorage },
+  cart: {
+    cartItem: cartItemFromStorage
+  }
 };
 
 const middleware = [thunk];

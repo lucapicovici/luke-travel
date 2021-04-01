@@ -6,6 +6,7 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 import hotelRoutes from './routes/hotelRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import orderRoutes from './routes/orderRoutes.js';
 
 dotenv.config();
 const app = express();
@@ -16,6 +17,7 @@ connectDB();
 app.use(express.json());
 app.use('/api/hotels', hotelRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.get('/', (req, res) => res.json('LukeTravel API is running...'));
 

@@ -1,32 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, Carousel, Container, Card, ListGroup, ButtonGroup, ToggleButton } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button } from 'react-bootstrap';
+import { Link, useLocation } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import RoomDetails from '../components/RoomDetails';
 import { listHotelDetails } from '../store/actions/hotelActions';
+import { addToCart } from '../store/actions/cartActions';
+import { validateOrder } from '../store/actions/orderActions';
+import { ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
 
-const HotelScreen = ({ match }) => {
+const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
 
   const dispatch = useDispatch();
+  const location = useLocation();
   
   const hotelDetails = useSelector(state => state.hotelDetails);
   const { loading, error, hotel } = hotelDetails;
+
+  const orderValidate = useSelector(state => state.orderValidate);
+  const { 
+    loading: loadingValidate, 
+    error: errorValidate, 
+    success: successValidate
+  } = orderValidate;
   
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
+
   const [roomChecked, setRoomChecked] = useState('');
   const [roomCheckedDetails, setRoomCheckedDetails] = useState({});
+  const [checkIn, setCheckIn] = useState('');
+  const [checkOut, setCheckOut] = useState('');
+  const [adults, setAdults] = useState(1);
 
   useEffect(() => {
-    if (hotel._id !== hotelId) {
+    if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
+      dispatch({ type: ORDER_VALIDATE_RESET });
     }
     if (!loading) {
       setRoomChecked(hotel.roomTypes && hotel.roomTypes[0]._id);
       setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
     }
-  }, [dispatch, hotelId, hotel, loading]);
+    
+  }, 
+  [
+    dispatch, 
+    hotelId, 
+    hotel, 
+    loading
+  ]);
+
+  useEffect(() => {
+    if (successValidate) {
+      const booking = {
+        checkIn,
+        checkOut,
+        adults,
+        hotel: hotel._id,
+        roomId: roomCheckedDetails._id,
+        price: 0
+      }
+      dispatch(addToCart(booking));
+      dispatch({ type: ORDER_VALIDATE_RESET });
+      history.push('/login?redirect=shipping');
+    }
+  }, [dispatch, successValidate, checkIn, checkOut, adults, hotel, roomCheckedDetails, history])
 
   const findRoomById = id => {
     return hotel.roomTypes.find(room => room._id === id);
@@ -37,9 +78,43 @@ const HotelScreen = ({ match }) => {
     setRoomCheckedDetails(findRoomById(e.target.value));
   }
 
+  const getCurrentDay = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  }
+
+  const getNextDay = (date) => {
+    if (date) {
+      date = new Date(date);
+      date.setDate(date.getDate() + 1);
+      return date.toISOString().split('T')[0];
+    }
+  }
+
+  // Verifica disponibilitatea camerei prin apel API
+  const checkAvailability = (e) => {
+    e.preventDefault();
+
+    if (!userInfo) {
+      history.push(`/login?redirect=${location.pathname}`);
+    } else {
+      const booking = {
+        checkIn,
+        checkOut,
+        hotel: hotel._id,
+        roomId: roomCheckedDetails._id
+      }
+
+      dispatch(validateOrder({
+        ...booking, 
+        availableRooms: roomCheckedDetails.availableRooms
+      }));
+    }
+  }
+
   return(
     <>
-    <Link className='btn btn-outline-secondary my-3' to='/'>
+    <Link className='btn btn-outline-secondary my-3' to='/hotels'>
       Go Back
      </Link>
     {loading ? (
@@ -108,6 +183,60 @@ const HotelScreen = ({ match }) => {
         <Col md={12} lg={4}>
           {roomCheckedDetails && (
             <RoomDetails room={roomCheckedDetails} />
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col md={6} lg={3}>
+          <Form onSubmit={checkAvailability}>
+            <Form.Group>
+              <Form.Label>Check In</Form.Label>
+              <Form.Control 
+                type='date'
+                name='checkIn'
+                required
+                min={getCurrentDay()}
+                value={checkIn}
+                onChange={(e) => setCheckIn(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Check Out</Form.Label>
+              <Form.Control 
+                type='date'
+                name='checkOut'
+                required
+                disabled={!checkIn}
+                min={getNextDay(checkIn)}
+                value={checkOut}
+                onChange={(e) => setCheckOut(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Adults</Form.Label>
+              <Form.Control
+                type='number' 
+                placeholder='0'
+                required
+                value={adults}
+                min='1'
+                max={roomCheckedDetails && roomCheckedDetails.peopleCount}
+                onChange={(e) => setAdults(e.target.value)}
+              />
+              <Form.Text className="text-muted">
+                Max adults: {roomCheckedDetails && roomCheckedDetails.peopleCount}
+              </Form.Text>
+            </Form.Group>
+            <Button type='submit' variant='info'>
+              Check availability
+            </Button>
+          </Form>
+        </Col>
+        <Col md={6} lg={9}>
+          {loadingValidate ? (
+            <Loader />
+          ) : errorValidate && (
+            <Message variant='danger'>{errorValidate}</Message>
           )}
         </Col>
       </Row>
