@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
@@ -54,14 +55,13 @@ export const login = (email, password) => async(dispatch) => {
 export const logout = () => async(dispatch) => {
   localStorage.removeItem('userInfo');
   dispatch({ type: USER_LOGOUT });
+  dispatch({ type: ORDER_LIST_MY_RESET });
   window.location.href = '/';
 };
 
 export const register = (name, email, password) => async(dispatch) => {
   try {
-    dispatch({
-      type: USER_REGISTER_REQUEST
-    });
+    dispatch({ type: USER_REGISTER_REQUEST });
 
     const config = {
       headers: {
@@ -102,9 +102,7 @@ export const getUserDetails = id => async(dispatch, getState) => {
     // Preia informatiile utilizatorului logat
     const { userLogin: { userInfo } } = getState();
 
-    dispatch({
-      type: USER_DETAILS_REQUEST
-    });
+    dispatch({ type: USER_DETAILS_REQUEST });
 
     const config = {
       headers: {
@@ -135,9 +133,7 @@ export const updateUserProfile = user => async(dispatch, getState) => {
     // Preia informatiile utilizatorului logat
     const { userLogin: { userInfo } } = getState();
 
-    dispatch({
-      type: USER_UPDATE_PROFILE_REQUEST
-    });
+    dispatch({ type: USER_UPDATE_PROFILE_REQUEST });
 
     const config = {
       headers: {

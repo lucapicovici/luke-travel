@@ -9,8 +9,14 @@ export const addToCart = (booking) => async(dispatch, getState) => {
       checkIn: booking.checkIn,
       checkOut: booking.checkOut,
       adults: booking.adults,
-      hotel: booking.hotel,
-      roomId: booking.roomId,
+      hotel: {
+        _id: booking.hotel._id,
+        name: booking.hotel.name
+      },
+      room: {
+        _id: booking.room._id,
+        name: booking.room.name
+      },
       price: booking.price
     }
   });

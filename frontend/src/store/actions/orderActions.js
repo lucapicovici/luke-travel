@@ -4,7 +4,10 @@ import {
   ORDER_CREATE_FAIL,
   ORDER_VALIDATE_REQUEST,
   ORDER_VALIDATE_SUCCESS,
-  ORDER_VALIDATE_FAIL
+  ORDER_VALIDATE_FAIL,
+  ORDER_LIST_MY_FAIL,
+  ORDER_LIST_MY_REQUEST,
+  ORDER_LIST_MY_SUCCESS
 } from '../constants/orderConstants';
 import { CART_RESET } from '../constants/cartConstants';
 import axios from 'axios';
@@ -59,6 +62,35 @@ export const validateOrder = order => async(dispatch) => {
   } catch (error) {
     dispatch({
       type: ORDER_VALIDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    });
+  }
+}
+
+export const listMyOrders = () => async(dispatch, getState) => {
+  try {
+    dispatch({ type: ORDER_LIST_MY_REQUEST });
+
+    const { userLogin: { userInfo } } = getState();
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    };
+
+    const { data } = await axios.get(`/api/orders/my-orders`, config);
+
+    dispatch({
+      type: ORDER_LIST_MY_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_LIST_MY_FAIL,
       payload:
         error.response && error.response.data.message
         ? error.response.data.message

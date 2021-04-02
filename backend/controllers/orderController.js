@@ -7,6 +7,7 @@ import { orderModel as Order } from '../models/index.js';
  * @access        Private
  */
 const addOrderItems = asyncHandler(async(req, res) => {
+  // TODO: validate input
   const { booking } = req.body;
 
   if (!booking) {
@@ -34,9 +35,6 @@ const validateOrder = asyncHandler(async(req, res) => {
   checkIn = new Date(checkIn);
   checkOut = new Date(checkOut);
 
-  console.log(checkIn)
-  console.log(checkOut)
-
   // Pentru hotelul afisat pe pagina
   // Cauta toate rezervarile camerei pentru care se va afla disponibilitatea in perioada aleasa
   const orders = await Order.find({
@@ -55,7 +53,6 @@ const validateOrder = asyncHandler(async(req, res) => {
     res.status(400);
     throw new Error('Room not available');
   }
-
 });
 
 /**
@@ -93,7 +90,7 @@ const bookingsOverlap = async(date1, date2, date3, date4) => {
     !(X>A && X>=B && Y>A && Y>B)
   ) return true;
   else return false;
-}
+};
 
 const bookingsOverlapNumber = async(bookings, date1, date2) => {
   const X = new Date(date1);
@@ -108,10 +105,21 @@ const bookingsOverlapNumber = async(bookings, date1, date2) => {
     }
   }
   return sum;
-}
+};
+
+/**
+ * @description   Returneaza toate comenzile utilizatorului logat
+ * @route         GET /api/orders/my-orders
+ * @access        Private
+ */
+const getMyOrders = asyncHandler(async(req, res) => {
+  const orders = await Order.find({ user: req.user._id });
+  res.status(200).json(orders);
+});
 
 
 export {
   addOrderItems,
-  validateOrder
+  validateOrder,
+  getMyOrders
 }

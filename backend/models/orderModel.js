@@ -6,14 +6,20 @@ const bookingSchema = mongoose.Schema(
     checkOut: { type: Date, required: true },
     adults: { type: Number, required: true, min: 0 },
     hotel: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Hotel',
-      required: true
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hotel',
+        required: true
+      },
+      name: { type: String, required: true }
     },
-    roomId: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: 'Hotel.roomTypes',
-      required: true 
+    room: {
+      _id: {
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Hotel.roomTypes',
+        required: true 
+      },
+      name: { type: String, required: true }
     },
     price: { type: Number, required: true, default: 0.0 },
   }
@@ -73,7 +79,7 @@ const orderSchema = mongoose.Schema(
     // },
     // deliveredAt: {
     //   type: Date
-    // },
+    // }
   }, 
   {
     timestamps: true

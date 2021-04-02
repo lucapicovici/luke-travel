@@ -45,13 +45,7 @@ const HotelScreen = ({ match, history }) => {
       setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
     }
     
-  }, 
-  [
-    dispatch, 
-    hotelId, 
-    hotel, 
-    loading
-  ]);
+  }, [dispatch, hotelId, hotel, loading]);
 
   useEffect(() => {
     if (successValidate) {
@@ -59,8 +53,14 @@ const HotelScreen = ({ match, history }) => {
         checkIn,
         checkOut,
         adults,
-        hotel: hotel._id,
-        roomId: roomCheckedDetails._id,
+        hotel: {
+          _id: hotel._id,
+          name: hotel.name
+        },
+        room: {
+          _id: roomCheckedDetails._id,
+          name: roomCheckedDetails.name
+        },
         price: 0
       }
       dispatch(addToCart(booking));

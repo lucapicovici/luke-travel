@@ -14,7 +14,8 @@ import {
 import { cartReducer } from './reducers/cartReducer';
 import {
   orderCreateReducer,
-  orderValidateReducer
+  orderValidateReducer,
+  orderListMyReducer
 } from './reducers/orderReducer';
 
 const reducer = combineReducers({
@@ -26,7 +27,8 @@ const reducer = combineReducers({
   userUpdateProfile: userUpdateProfileReducer,
   cart: cartReducer,
   orderCreate: orderCreateReducer,
-  orderValidate: orderValidateReducer
+  orderValidate: orderValidateReducer,
+  orderListMy: orderListMyReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista
