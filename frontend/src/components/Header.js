@@ -3,15 +3,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../store/actions/userActions.js';
+import { CART_RESET } from '../store/constants/cartConstants';
+import { useHistory } from 'react-router';
 
 const Header = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
+  const cart = useSelector(state => state.cart);
+  const { booking } = cart;
+  const bookingExists = Object.keys(booking).length !== 0;
+
   const logoutHandler = () => {
     dispatch(logout());
+  }
+
+  const clearBookingHandler = () => {
+    dispatch({ type: CART_RESET });
+    history.push('/');
   }
 
   return (
@@ -24,6 +36,19 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
+            {bookingExists && (
+              <NavDropdown title={`Currently booking: ${booking.room.name}`} id='booking'>
+                <LinkContainer to={`/hotel/${booking.hotel._id}`}>
+                  <NavDropdown.Item>View room</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/login?redirect=shipping'>
+                  <NavDropdown.Item>Proceed To Checkout</NavDropdown.Item>
+                </LinkContainer>
+                <NavDropdown.Item onClick={clearBookingHandler}>
+                  Clear Booking
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
             {userInfo ? (
               <NavDropdown title={userInfo.name} id='username'>
                 <LinkContainer to='/profile'>

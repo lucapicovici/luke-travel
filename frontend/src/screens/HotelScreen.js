@@ -35,6 +35,23 @@ const HotelScreen = ({ match, history }) => {
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(1);
 
+  const addDaysToDate = (date, days) => {
+    let newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + days);
+    return newDate;
+  }
+
+  const getDaysRange = (start, end) => {
+    start = new Date(start);
+    end = new Date(end);
+    let range = 0, currentDate = start;
+    while (currentDate < end) {
+      range += 1;
+      currentDate = addDaysToDate(currentDate, 1);
+    }
+    return range;
+  }
+
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
@@ -61,13 +78,24 @@ const HotelScreen = ({ match, history }) => {
           _id: roomCheckedDetails._id,
           name: roomCheckedDetails.name
         },
-        price: 0
+        price: getDaysRange(checkIn, checkOut) * roomCheckedDetails.price
       }
       dispatch(addToCart(booking));
       dispatch({ type: ORDER_VALIDATE_RESET });
       history.push('/login?redirect=shipping');
     }
-  }, [dispatch, successValidate, checkIn, checkOut, adults, hotel, roomCheckedDetails, history])
+  }, 
+  [
+    dispatch, 
+    successValidate, 
+    checkIn, 
+    checkOut, 
+    adults, 
+    hotel, 
+    roomCheckedDetails, 
+    history, 
+    getDaysRange
+  ])
 
   const findRoomById = id => {
     return hotel.roomTypes.find(room => room._id === id);
@@ -104,7 +132,7 @@ const HotelScreen = ({ match, history }) => {
         hotel: hotel._id,
         roomId: roomCheckedDetails._id
       }
-
+  
       dispatch(validateOrder({
         ...booking, 
         availableRooms: roomCheckedDetails.availableRooms

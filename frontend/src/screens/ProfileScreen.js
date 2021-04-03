@@ -59,7 +59,7 @@ const ProfileScreen = ({ history }) => {
   return (
     <Row>
       <Col md={3}>
-        <h1>Sign Up</h1>
+        <h3>Account</h3>
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
@@ -111,7 +111,7 @@ const ProfileScreen = ({ history }) => {
         </Form>
       </Col>
       <Col md={9}>
-        <h2>My Orders</h2>
+        <h3>My Orders</h3>
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (

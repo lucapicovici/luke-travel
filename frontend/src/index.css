@@ -2,6 +2,16 @@ main {
   min-height: 80vh;
 }
 
+h2 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h3 {
+  font-size: 1.8rem;
+  padding: 0.5rem 0;
+}
+
 /* --- Hotel List --- */
 .hotelListRow {
   flex-direction: column;
@@ -68,8 +78,9 @@ main {
   color: grey;
 }
 
-
+/* -------------------- */
 /* --- Hotel Screen --- */
+/* -------------------- */
 #hotelCarousel .carousel-item-next,
 #hotelCarousel .carousel-item-prev,
 #hotelCarousel .carousel-item.active {
@@ -129,4 +140,16 @@ main {
 .roomDetails {
   word-break: break-all;
   font-size: 0.95em;
+}
+
+/* -------------------- */
+/* --- Order Screen --- */
+/* -------------------- */
+#orderId {
+  color: grey;
+  padding-left: 20px;
+}
+
+#shippingDetails p {
+  margin-bottom: 10px;
 }

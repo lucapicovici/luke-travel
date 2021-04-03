@@ -15,7 +15,9 @@ import { cartReducer } from './reducers/cartReducer';
 import {
   orderCreateReducer,
   orderValidateReducer,
-  orderListMyReducer
+  orderListMyReducer,
+  orderDetailsReducer,
+  orderPayReducer
 } from './reducers/orderReducer';
 
 const reducer = combineReducers({
@@ -28,7 +30,9 @@ const reducer = combineReducers({
   cart: cartReducer,
   orderCreate: orderCreateReducer,
   orderValidate: orderValidateReducer,
-  orderListMy: orderListMyReducer
+  orderListMy: orderListMyReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista
@@ -36,14 +40,19 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo')) 
   : null;
 
-const cartItemFromStorage = localStorage.getItem('cartItem') 
-? JSON.parse(localStorage.getItem('cartItem')) 
+const bookingFromStorage = localStorage.getItem('booking') 
+? JSON.parse(localStorage.getItem('booking')) 
 : {};
+
+const shippingAddressFromStorage = localStorage.getItem('shippingAddress') 
+  ? JSON.parse(localStorage.getItem('shippingAddress')) 
+  : {};
 
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   cart: {
-    cartItem: cartItemFromStorage
+    booking: bookingFromStorage,
+    shippingAddress: shippingAddressFromStorage
   }
 };
 

@@ -8,7 +8,13 @@ import { orderModel as Order } from '../models/index.js';
  */
 const addOrderItems = asyncHandler(async(req, res) => {
   // TODO: validate input
-  const { booking } = req.body;
+  const { 
+    booking,
+    shippingAddress,
+    paymentMethod,
+    taxPrice,
+    totalPrice 
+  } = req.body;
 
   if (!booking) {
     res.status(400);
@@ -16,7 +22,11 @@ const addOrderItems = asyncHandler(async(req, res) => {
   } else {
     const order = new Order({
       user: req.user._id,
-      booking
+      booking,
+      shippingAddress,
+      paymentMethod,
+      taxPrice,
+      totalPrice
     });
 
     const createdOrder = await order.save();
@@ -117,9 +127,54 @@ const getMyOrders = asyncHandler(async(req, res) => {
   res.status(200).json(orders);
 });
 
+/**
+ * @desc    Returneaza comanda dupa ID
+ * @route   GET /api/orders/:id
+ * @access  Private
+ */
+const getOrderById = asyncHandler(async(req, res) => {
+  const order = await Order.findById(req.params.id).populate('user', 'name email');
+
+  if (order) {
+    res.json(order);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
+/**
+ * @desc    Actualizeaza comanda ca fiind platita
+ * @route   PUT /api/orders/:id/pay
+ * @access  Private
+ */
+ const updateOrderToPaid = asyncHandler(async(req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isPaid = true;
+    order.paidAt = Date.now();
+    order.paymentResult = {
+      id: req.body.id,
+      status: req.body.status,
+      update_time: req.body.update_time,
+      email_address: req.body.payer.email_address
+    };
+
+    const updatedOrder = await order.save();
+
+    res.json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
+});
+
 
 export {
   addOrderItems,
   validateOrder,
-  getMyOrders
+  getMyOrders,
+  getOrderById,
+  updateOrderToPaid
 }

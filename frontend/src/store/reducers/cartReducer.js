@@ -7,19 +7,19 @@ import {
 } from '../constants/cartConstants';
 
 export const cartReducer = (
-  state={ cartItem: {}, shippingAddress: {} }, 
+  state={ booking: {}, shippingAddress: {} }, 
   action
 ) => {
   switch(action.type) {
     case CART_ADD_ITEM:
       return { 
         ...state, 
-        cartItem: action.payload
+        booking: action.payload
       }
     case CART_REMOVE_ITEM:
       return {
         ...state,
-        cartItem: {}
+        booking: {}
       }
     case CART_SAVE_SHIPPING_ADDRESS:
       return {
@@ -33,7 +33,7 @@ export const cartReducer = (
       }
     case CART_RESET:
       return {
-        cartItem: {},
+        booking: {},
         shippingAddress: {} 
       }
     default:
