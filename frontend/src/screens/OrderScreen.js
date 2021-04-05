@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2';
-import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap';
+import { Row, Col, ListGroup, Card, Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
@@ -126,10 +126,16 @@ const OrderScreen = ({ match, history }) => {
               : (
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
-                    Room: <strong>{order.booking.room.name}</strong>
+                    Room: {' '}
+                    <Link to={`/hotel/${order.booking.hotel._id}?room=${order.booking.room._id}`}>
+                      <strong>{order.booking.room.name}</strong>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    Hotel: <strong>{order.booking.hotel.name}</strong>
+                    Hotel: {' '}
+                    <Link to={`/hotel/${order.booking.hotel._id}`}>
+                      <strong>{order.booking.hotel.name}</strong>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Check-in: <strong>{order.booking.checkIn.substring(0, 10)}</strong>

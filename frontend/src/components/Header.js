@@ -38,7 +38,7 @@ const Header = () => {
             <Nav className="ml-auto">
             {bookingExists && (
               <NavDropdown title={`Currently booking: ${booking.room.name}`} id='booking'>
-                <LinkContainer to={`/hotel/${booking.hotel._id}`}>
+                <LinkContainer to={`/hotel/${booking.hotel._id}?room=${booking.room._id}`}>
                   <NavDropdown.Item>View room</NavDropdown.Item>
                 </LinkContainer>
                 <LinkContainer to='/login?redirect=shipping'>

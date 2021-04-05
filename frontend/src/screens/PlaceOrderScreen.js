@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../store/actions/orderActions';
+import { Link } from 'react-router-dom';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
@@ -69,10 +70,16 @@ const PlaceOrderScreen = ({ history }) => {
               : (
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
-                    Room: <strong>{cart.booking.room.name}</strong>
+                    Room: {' '}
+                    <Link to={`/hotel/${cart.booking.hotel._id}?room=${cart.booking.room._id}`}>
+                      <strong>{cart.booking.room.name}</strong>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
-                    Hotel: <strong>{cart.booking.hotel.name}</strong>
+                    Hotel: {' '}
+                    <Link to={`/hotel/${cart.booking.hotel._id}`}>
+                      <strong>{cart.booking.hotel.name}</strong>
+                    </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Check-in: <strong>{cart.booking.checkIn}</strong>

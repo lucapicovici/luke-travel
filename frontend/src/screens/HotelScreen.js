@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
@@ -35,36 +36,43 @@ const HotelScreen = ({ match, history }) => {
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(1);
 
-  const addDaysToDate = (date, days) => {
-    let newDate = new Date(date);
-    newDate.setDate(newDate.getDate() + days);
-    return newDate;
-  }
-
-  const getDaysRange = (start, end) => {
-    start = new Date(start);
-    end = new Date(end);
-    let range = 0, currentDate = start;
-    while (currentDate < end) {
-      range += 1;
-      currentDate = addDaysToDate(currentDate, 1);
-    }
-    return range;
-  }
-
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
       dispatch({ type: ORDER_VALIDATE_RESET });
     }
     if (!loading) {
-      setRoomChecked(hotel.roomTypes && hotel.roomTypes[0]._id);
-      setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
+      const qs = queryString.parse(location.search);
+      if (qs.room && hotel.roomTypes) {
+        const roomQueryIndex = hotel.roomTypes.findIndex((room) => room._id === qs.room);
+        setRoomChecked(hotel.roomTypes[roomQueryIndex]._id);
+        setRoomCheckedDetails(hotel.roomTypes[roomQueryIndex]);
+      } else {
+        setRoomChecked(hotel.roomTypes && hotel.roomTypes[0]._id);
+        setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
+      }
     }
     
-  }, [dispatch, hotelId, hotel, loading]);
+  }, [dispatch, hotelId, hotel, loading, location]);
 
   useEffect(() => {
+    const addDaysToDate = (date, days) => {
+      let newDate = new Date(date);
+      newDate.setDate(newDate.getDate() + days);
+      return newDate;
+    }
+
+    const getDaysRange = (start, end) => {
+      start = new Date(start);
+      end = new Date(end);
+      let range = 0, currentDate = start;
+      while (currentDate < end) {
+        range += 1;
+        currentDate = addDaysToDate(currentDate, 1);
+      }
+      return range;
+    }
+
     if (successValidate) {
       const booking = {
         checkIn,
@@ -93,8 +101,7 @@ const HotelScreen = ({ match, history }) => {
     adults, 
     hotel, 
     roomCheckedDetails, 
-    history, 
-    getDaysRange
+    history
   ])
 
   const findRoomById = id => {
