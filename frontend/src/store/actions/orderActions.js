@@ -41,6 +41,7 @@ export const createOrder = order => async(dispatch, getState) => {
     dispatch({ type: CART_RESET });
     localStorage.removeItem('booking');
     localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,

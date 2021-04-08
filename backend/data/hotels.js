@@ -61,9 +61,7 @@ const hotels = [
     type: "Guest House",
     address: "Tranton road, Southwark, London, SE16 4SE, United Kingdom",
     images: [
-      {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/243/243393380.jpg"},
       {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/248/248297029.jpg"},
-      {src: "https://r-cf.bstatic.com/images/hotel/max1280x900/243/243394713.jpg"}
     ],
     description: "Ideally located in the Southwark district of London, Tower Bridge Rooms is set 1.5 km from Tower Bridge, 2.6 km from London Bridge and 2.6 km from Sky Garden. The property is around 2.7 km from Borough Market, 3.4 km from Tower of London and 3.9 km from St Paul's Cathedral. The accommodation offers a shared kitchen and free WiFi throughout the property.",
     amenities: [

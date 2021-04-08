@@ -23,6 +23,9 @@ const Header = () => {
 
   const clearBookingHandler = () => {
     dispatch({ type: CART_RESET });
+    localStorage.removeItem('booking');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
     history.push('/');
   }
 

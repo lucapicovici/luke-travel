@@ -26,7 +26,7 @@ const OrderScreen = ({ match, history }) => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
-  if (!loading) {
+  if (!loading && order) {
     // Calculeaza preturile
     const addDecimals = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2);
@@ -68,7 +68,7 @@ const OrderScreen = ({ match, history }) => {
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
-    dispatch(listMyOrders());  // Actualizare Redux state dupa plasare comanda
+    dispatch(listMyOrders());  // Actualizare Redux state dupa platirea comenzii
   };
 
   const deliverHandler = () => {
@@ -76,9 +76,9 @@ const OrderScreen = ({ match, history }) => {
   }
 
   const arrangeDate = (date) => {
-    let arr = date.split('T');
-    arr[1] = arr[1].substring(0, 8);
-    return `${arr[0]} at ${arr[1]}`;
+    const dateObj = new Date(date);
+    const localDate = new Date(dateObj.getTime() - (order.timezoneOffset * 60000));
+    return `${localDate}`;
   }
 
   return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>

@@ -74,6 +74,11 @@ const orderSchema = mongoose.Schema(
     },
     deliveredAt: {
       type: Date
+    },
+    timezoneOffset: {
+      type: Number,
+      required: true,
+      default: (new Date()).getTimezoneOffset()
     }
   }, 
   {

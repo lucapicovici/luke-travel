@@ -3,16 +3,21 @@ import { Button, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { createOrder } from '../store/actions/orderActions';
-import { Link } from 'react-router-dom';
+import { createOrder, listMyOrders } from '../store/actions/orderActions';
+import { Link, useLocation } from 'react-router-dom';
+import { ORDER_CREATE_RESET } from '../store/constants/orderConstants';
 
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const cart = useSelector(state => state.cart);
 
   const orderCreate = useSelector(state => state.orderCreate);
   const { order, success, error } = orderCreate;
+
+  const userLogin = useSelector(state => state.userLogin);
+  const { userInfo } = userLogin;
 
   // Calculeaza preturile
   const addDecimals = (num) => {
@@ -29,9 +34,10 @@ const PlaceOrderScreen = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
-  }, [history, success]);
+  }, [dispatch, history, success]);
 
   const placeOrderHandler = () => {
     dispatch(createOrder({
@@ -41,6 +47,7 @@ const PlaceOrderScreen = ({ history }) => {
       taxPrice: cart.taxPrice,
       totalPrice: cart.totalPrice
     }));
+    dispatch(listMyOrders());  // Actualizare Redux state dupa plasare comanda
   }
 
   return (
@@ -126,16 +133,24 @@ const PlaceOrderScreen = ({ history }) => {
                 </ListGroup.Item>
               )}
 
-              <ListGroup.Item>
-                <Button 
-                  type='button' 
-                  className='btn-block' 
-                  disabled={Object.keys(cart.booking).length === 0} 
-                  onClick={placeOrderHandler}
-                >
-                  Place Order
-                </Button>
-              </ListGroup.Item>
+              {!userInfo ? (
+                <ListGroup.Item>
+                  <Link to={`/login?redirect=${location.pathname}`} className='btn btn-warning btn-block'>
+                    Please log in first
+                  </Link>
+                </ListGroup.Item>
+              ) : (
+                <ListGroup.Item>
+                  <Button 
+                    type='button' 
+                    className='btn-block' 
+                    disabled={Object.keys(cart.booking).length === 0} 
+                    onClick={placeOrderHandler}
+                  >
+                    Place Order
+                  </Button>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>
