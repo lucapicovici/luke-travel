@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import geocoder from '../utils/geocoder.js';
 
 const reviewSchema = mongoose.Schema(
   {
@@ -50,6 +51,27 @@ const hotelSchema = mongoose.Schema(
       type: String, 
       required: true
     },
+    location: {
+      // GeoJSON Point
+      type: {
+        type: String,
+        enum: ['Point'],
+        required: true,
+        default: 'Point'
+      },
+      coordinates: {
+        type: [Number],
+        required: true,
+        index: '2dsphere',
+        default: [0, 0]
+      },
+      formattedAddress: String,
+      street: String,
+      city: String,
+      zipcode: String,
+      state: String,
+      country: String
+    },
     images: [
         {src: {type: String, required: true}}
     ],
@@ -77,6 +99,26 @@ const hotelSchema = mongoose.Schema(
     timestamps: true
   }
 );
+
+// Geocode & creare proprietate locatie
+hotelSchema.pre('save', async function(next) {
+  const loc = await geocoder.geocode(this.address);
+  this.location = {
+    type: 'Point',
+    coordinates: [loc[0].longitude, loc[0].latitude],
+    formattedAddress: loc[0].formattedAddress,
+    street: loc[0].streetName,
+    city: loc[0].city,
+    zipcode: loc[0].zipcode,
+    state: loc[0].stateCode,
+    country: loc[0].countryCode
+  }
+
+  // Stergerea adresei din baza de date
+  this.address = undefined;
+
+  next();
+});
 
 const Hotel = mongoose.model('Hotel', hotelSchema);
 

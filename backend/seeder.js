@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 import colors from 'colors';
-import hotels from './data/hotels.js';
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+// import hotels from './data/hotels.js';
 import users from './data/users.js';
 import { 
   connectDB,
@@ -9,7 +12,14 @@ import {
   orderModel as Order
 } from './models/index.js';
 
+const __dirname = path.resolve();
+dotenv.config({ path: `${__dirname}/config.env` });
 connectDB();
+
+// Citire fisiere JSON
+const hotels = JSON.parse(
+  fs.readFileSync(`${__dirname}/backend/data/hotels.json`, 'utf-8')
+);
 
 const importData = async() => {
   try {
@@ -26,7 +36,7 @@ const importData = async() => {
       return { ...hotel, user: adminUser}
     });
 
-    await Hotel.insertMany(sampleHotels);
+    await Hotel.create(sampleHotels);
 
     console.log('Data imported!'.green.inverse);
     process.exit();

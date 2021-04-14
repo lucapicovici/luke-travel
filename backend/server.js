@@ -1,6 +1,7 @@
 import express from 'express';
 import colors from 'colors';
 import dotenv from 'dotenv';
+import path from 'path';
 import { connectDB } from './models/index.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
@@ -8,7 +9,8 @@ import hotelRoutes from './routes/hotelRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import orderRoutes from './routes/orderRoutes.js';
 
-dotenv.config();
+const __dirname = path.resolve();
+dotenv.config({ path: `${__dirname}/config.env` });
 const app = express();
 const PORT = process.env.PORT || 5000;
 
