@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button } from 'react-bootstrap';
+import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button, NavLink } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
@@ -10,9 +10,14 @@ import { listHotelDetails } from '../store/actions/hotelActions';
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
 import { ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
+import { Helmet } from 'react-helmet';
+import initMapQuestMap from '../utils/mapquest';
 
 const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
+  const refContainer = useRef({
+    hotelReqHasBeenDispatched: false
+  });
 
   const dispatch = useDispatch();
   const location = useLocation();
@@ -39,11 +44,18 @@ const HotelScreen = ({ match, history }) => {
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
+      refContainer.current.hotelReqHasBeenDispatched = true;
       dispatch({ type: ORDER_VALIDATE_RESET });
+      console.log(`dispatched hotel request!`)
+      console.log(`loading is now ${loading}`)
     }
-    if (!loading) {
+    if (loading !== undefined && !loading) {
+      refContainer.current.hotelReqHasBeenDispatched = false;
+      // Set loading to undefined somewhere so this block doesn't run twice
+      console.log(`i'm still running!`)
       const qs = queryString.parse(location.search);
       if (qs.room && hotel.roomTypes) {
+        // @TODO: refactor if else
         const roomQueryIndex = hotel.roomTypes.findIndex((room) => room._id === qs.room);
         setRoomChecked(hotel.roomTypes[roomQueryIndex]._id);
         setRoomCheckedDetails(hotel.roomTypes[roomQueryIndex]);
@@ -52,8 +64,20 @@ const HotelScreen = ({ match, history }) => {
         setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
       }
     }
-    
   }, [dispatch, hotelId, hotel, loading, location]);
+
+  useEffect(() => {
+    console.log(`*effect runs. loading is ${loading}`)
+    if (loading !== undefined && !loading && !refContainer.current.hotelReqHasBeenDispatched) {
+      console.log(`effect runs. loading is ${loading}`)
+      const lat = hotel.location && hotel.location.coordinates[1];
+      const lng = hotel.location && hotel.location.coordinates[0];
+      const hotelName = hotel.name;
+      const hotelType = hotel.type;
+      console.log(`we're about to execute initMap`)
+      initMapQuestMap(lat, lng, hotelName, hotelType);
+    }
+  }, [hotel, loading]);
 
   useEffect(() => {
     const addDaysToDate = (date, days) => {
@@ -102,7 +126,7 @@ const HotelScreen = ({ match, history }) => {
     hotel, 
     roomCheckedDetails, 
     history
-  ])
+  ]);
 
   const findRoomById = id => {
     return hotel.roomTypes.find(room => room._id === id);
@@ -167,7 +191,7 @@ const HotelScreen = ({ match, history }) => {
       <Row>
         <Col className='hotelScreenAddress'>
           <i className="fas fa-map-marker-alt"></i>
-          <span> {hotel.address}</span>
+          <span> {hotel.location && hotel.location.formattedAddress}</span>
         </Col>
       </Row>
       <Row>
@@ -273,6 +297,11 @@ const HotelScreen = ({ match, history }) => {
           ) : errorValidate && (
             <Message variant='danger'>{errorValidate}</Message>
           )}
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+            <div id='map' style={{width: '100%', height: '530px'}}></div>
         </Col>
       </Row>
       </>

@@ -29,7 +29,7 @@ export const hotelDetailsReducer = (
 ) => {
   switch(action.type) {
     case HOTEL_DETAILS_REQUEST:
-      return { loading: true, ...state };
+      return { loading: true, hotel: { reviews: [] } };
     case HOTEL_DETAILS_SUCCESS:
       return { 
         loading: false, 
