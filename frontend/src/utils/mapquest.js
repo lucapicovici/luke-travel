@@ -1,6 +1,4 @@
 const initMapQuestMap = async(latitude, longitutde, hotelName, hotelType) => {
-  console.log(`in FN: hotelName is ${hotelName}`);
-
   var L = window.L;
 
   L.mapquest.key = 'Dhql5s1ieeMg8y87RXgqvZeQeeo0QFUE';
