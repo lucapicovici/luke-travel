@@ -14,7 +14,9 @@ export const hotelListReducer = (state={ hotels: [] }, action) => {
     case HOTEL_LIST_SUCCESS:
       return { 
         loading: false, 
-        hotels: action.payload
+        hotels: action.payload.hotels,
+        page: action.payload.page,
+        pages: action.payload.pages
       }; 
     case HOTEL_LIST_FAIL:
       return { loading: false, error: action.payload };

@@ -53,9 +53,10 @@ const validateOrder = asyncHandler(async(req, res) => {
   }).select('booking');
   
   // Numarul rezervarilor care se suprapun cu perioada aleasa
-  const result = await bookingsOverlapNumber(orders, checkIn, checkOut);
+  const bookingsThatOverlap = await bookingsOverlapNumber(orders, checkIn, checkOut);
 
-  const validRooms = availableRooms - result;
+  // Numarul de camere disponibile in perioada aleasa
+  const validRooms = availableRooms - bookingsThatOverlap;
 
   if (validRooms > 0) {
     res.status(200).json(validRooms);

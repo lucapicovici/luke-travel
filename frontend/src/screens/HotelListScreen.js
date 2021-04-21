@@ -4,17 +4,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Hotel from '../components/Hotel';
+import Paginate from '../components/Paginate';
 import { listHotels } from '../store/actions/hotelActions';
 
-const HotelListScreen = () => {
+const HotelListScreen = ({ match }) => {
+  const pageNumber = match.params.pageNumber || 1;
+
   const dispatch = useDispatch();
 
   const hotelList = useSelector(state => state.hotelList);
-  const { loading, error, hotels } = hotelList;
+  const { loading, error, hotels, page, pages } = hotelList;
 
   useEffect(() => {
-    dispatch(listHotels());
-  }, [dispatch]);
+    dispatch(listHotels(pageNumber));
+  }, [dispatch, pageNumber]);
 
   return(
     <>
@@ -23,6 +26,7 @@ const HotelListScreen = () => {
     ) : error ? (
       <Message variant='danger'>{error}</Message>
     ) : (
+      <>
       <Row className='hotelListRow'>
         {hotels.map(hotel => (
           <Col key={hotel._id} className='hotelListCol' md={12} lg={9}>
@@ -30,6 +34,8 @@ const HotelListScreen = () => {
           </Col>
         ))}
       </Row>
+      <Paginate pages={pages} page={page} />
+      </>
     )}
     </>
   );

@@ -21,7 +21,8 @@ function App() {
       <main className='py-3'>
         <Container>
           <Route exact path='/' component={HomeScreen} />
-          <Route path='/hotels' component={HotelListScreen} />
+          <Route exact path='/hotels' component={HotelListScreen} />
+          <Route exact path='/hotels/page/:pageNumber' component={HotelListScreen} />
           <Route path='/hotel/:id' component={HotelScreen} />
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />

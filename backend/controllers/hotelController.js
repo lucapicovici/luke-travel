@@ -7,10 +7,22 @@ import { hotelModel as Hotel } from '../models/index.js';
  * @access        Public
  */
 const getHotels = asyncHandler(async(req, res) => {
-  // Cauta toate hotelurile in baza de date
-  const hotels = await Hotel.find({});
+  // Numar maxim de elemente pe pagina
+  const pageSize = 3;
+  const page = Number(req.query.pageNumber) || 1;
 
-  res.status(200).json(hotels);
+  const count = await Hotel.countDocuments();
+
+  // Cauta toate hotelurile in baza de date
+  const hotels = await Hotel.find({})
+    .limit(pageSize)
+    .skip(pageSize * (page-1));
+
+  res.status(200).json({
+    hotels,
+    page,
+    pages: Math.ceil(count / pageSize)
+  });
 });
 
 /**
