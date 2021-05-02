@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import { orderModel as Order } from '../models/index.js';
+import { getRoomOrdersDates, getDaysBookings } from '../utils/orderUtils.js';
 
 /**
  * @description   Plaseaza o comanda
@@ -172,31 +173,29 @@ const getOrderById = asyncHandler(async(req, res) => {
 });
 
 /**
- * @description   Returneaza perioadele rezervarilor unui tip de camera dintr-un hotel
- * @route         GET /api/orders/:hotel/:room?start=2021-04-01&end=2021-06-30
+ * @description   Returneaza zilele ocupate ale unei camere de hotel
+ * @route         GET /api/orders/calendar/:hotel/:room?start=2021-04-01&end=2021-06-30
  * @access        Public
  */
-const getRoomOrdersDates = asyncHandler(async(req, res) => {
-  const query = {};
+const getRoomCalendarBookings_days = asyncHandler(async(req, res) => {
+  const roomOrders = await getRoomOrdersDates(req.params.hotel, req.params.room, req.query.start, req.query.end);
 
-  if (req.params.hotel) query['booking.hotel._id'] = req.params.hotel;
-  if (req.params.room) query['booking.room._id'] = req.params.room;
-  if (req.query.start) {
-    query['booking.checkIn'] = { $gte: new Date(req.query.start).toISOString() }
+  if (!roomOrders.success) {
+    res.status(400);
+    throw new Error(roomOrders.error);
   }
-  if (req.query.end) {
-    query['booking.checkOut'] = { $lt: new Date(req.query.end).toISOString() }
+
+  const orders = roomOrders.data;
+  const daysBookingsRequest = await getDaysBookings(orders);
+
+  if (!daysBookingsRequest.success) {
+    res.status(400);
+    throw new Error(daysBookingsRequest.error);
   }
-  query.isPaid = true;
 
-  const orders = await Order.find(query).select('booking.checkIn booking.checkOut');
-
-  const results = orders.map(order => ({
-    checkIn: order.booking.checkIn,
-    checkOut: order.booking.checkOut
-  }));
-
-  res.status(200).json(results);
+  const daysBookings = daysBookingsRequest.data;
+  
+  res.status(200).json(daysBookings);
 });
 
 
@@ -206,5 +205,5 @@ export {
   getMyOrders,
   getOrderById,
   updateOrderToPaid,
-  getRoomOrdersDates
+  getRoomCalendarBookings_days
 }

@@ -6,12 +6,12 @@ import {
   getMyOrders,
   getOrderById,
   updateOrderToPaid,
-  getRoomOrdersDates
+  getRoomCalendarBookings_days
 } from '../controllers/orderController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
 router.route('/').post(protect, addOrderItems);
-router.route('/:hotel/:room').get(getRoomOrdersDates);
+router.route('/calendar/:hotel/:room').get(getRoomCalendarBookings_days);
 router.route('/validate').get(validateOrder);
 router.route('/my-orders').get(protect, getMyOrders);
 router.route('/:id').get(protect, getOrderById);

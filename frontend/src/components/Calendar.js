@@ -2,7 +2,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Day from '../components/Day';
-import cloneDeep from 'lodash/cloneDeep';
 
 const Frame = styled.div`
   width: 400px;
@@ -38,7 +37,7 @@ const DayOfWeek = styled.div`
   cursor: pointer;
 `;
 
-const Calendar = ({ bookings, availableRooms }) => {
+const Calendar = ({ daysBookings, availableRooms }) => {
   const DAYS = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_LEAP = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
   const DAYS_OF_THE_WEEK = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
@@ -102,47 +101,6 @@ const Calendar = ({ bookings, availableRooms }) => {
     return arr;
   }
 
-  const constructFinalArray = () => {
-    const arr = constructArrayOfDays();
-
-    for (let i = 0; i < arr.length; i++) {
-      // Construieste data curenta
-      if (arr[i].props.day >= 1) {
-        let currDate = new Date(year, month, arr[i].props.day);
-        console.log(currDate)
-        
-        let exists = -1;
-        for (let j = 0; j < bookings.length; j++) {
-          console.log(`j=${j}`)
-
-          if (bookings[j].date.getYear() === currDate.getYear()) {
-            console.log('BAAAAAAAAAA')
-            // Deep clone arr[i]
-            let aux = cloneDeep(arr[i]);
-  
-            // Stabileste culoarea zilei
-            if (bookings[exists].bookings >= availableRooms) {
-              // Seteaza pe rosu
-              aux.props.color = 'red';
-            } else {
-              // Seteaza pe galben
-              aux.props.color = 'yellow';
-            }
-  
-            // Actualizeaza elementul cu ziua
-            arr[i] = aux;
-            console.log(`aux is ${aux}`)
-          }
-        }
-        // console.log(`exists is ${exists}`)
-      }
-    }
-    console.log(arr)
-
-    return arr;
-  }
-
-
   return (
     <Frame>
       <Header>
@@ -158,7 +116,43 @@ const Calendar = ({ bookings, availableRooms }) => {
             <strong>{d}</strong>
           </DayOfWeek>
         ))}
-        {bookings && availableRooms && constructFinalArray() }
+        {daysBookings && availableRooms && (
+          Array(days[month] + (startDay - 1))
+            .fill(null)
+            .map((_, index) => {
+              const d = index - (startDay - 2);
+              let currentDate, exists = -1;
+              if (d > 0) {
+                currentDate = new Date(Date.UTC(year, month, d));
+
+                exists = daysBookings.findIndex((obj) => (
+                  (new Date(obj.date)).toISOString() === currentDate.toISOString()
+                ));
+                console.log(exists)
+              }
+      
+              let dayColor = 'white';
+
+              if (exists >= 0) {
+                if (daysBookings[exists].bookings >= availableRooms) {
+                  dayColor = 'red';
+                } else {
+                  dayColor = 'yellow';
+                }
+              }
+
+              return (
+                <Day
+                  key={index}
+                  isToday={d > 0 && equalDates(currentDate, today)}
+                  onClick={() => setDate(new Date(year, month, d))}
+                  day={d > 0 ? d : ''}
+                  info={'a'}
+                  color={dayColor}
+                />
+              )
+            })
+        )}
       </Body>
     </Frame>
   );

@@ -10,10 +10,9 @@ import Calendar from '../components/Calendar';
 import { listHotelDetails } from '../store/actions/hotelActions';
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
-import { fetchCalendarBookings } from '../store/actions/orderActions';
+import { fetchCalendarDaysBookings } from '../store/actions/orderActions';
 import { ORDER_CALENDAR_RESET, ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
 import initMapQuestMap from '../utils/mapquest';
-import getCalendarBookings from '../utils/calendarBookings';
 
 const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
@@ -47,7 +46,6 @@ const HotelScreen = ({ match, history }) => {
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(1);
-  const [calendarBookings, setCalendarBookings] = useState([]);
 
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
@@ -73,18 +71,9 @@ const HotelScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (roomChecked && !loading) {
-      dispatch(fetchCalendarBookings(hotel._id, roomChecked));
+      dispatch(fetchCalendarDaysBookings(hotel._id, roomChecked));
     }
   }, [dispatch, roomChecked, hotel, loading])
-
-  useEffect(() => {
-    if (loadingCalendar !== undefined && !loadingCalendar && dataCalendar) {
-      const daysBookings = [];
-      console.log('getCalendar running...')
-      getCalendarBookings(dataCalendar, daysBookings);
-      setCalendarBookings(daysBookings);
-    }
-  }, [loadingCalendar, dataCalendar])
 
   useEffect(() => {
     if (loading !== undefined && !loading) {
@@ -320,9 +309,9 @@ const HotelScreen = ({ match, history }) => {
         <Col>
           {loadingCalendar ? (
             <Loader />
-          ) : roomCheckedDetails && calendarBookings.length >= 0 && (
+          ) : roomCheckedDetails && dataCalendar && (
             <Calendar 
-              bookings={calendarBookings} 
+              daysBookings={dataCalendar} 
               availableRooms={roomCheckedDetails.availableRooms} 
             />
           )}

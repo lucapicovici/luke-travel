@@ -169,11 +169,11 @@ export const payOrder = (orderId, paymentResult) => async(dispatch, getState) =>
   }
 };
 
-export const fetchCalendarBookings = (hotel, room) => async(dispatch) => {
+export const fetchCalendarDaysBookings = (hotel, room) => async(dispatch) => {
   try {
     dispatch({ type: ORDER_CALENDAR_REQUEST });
 
-    const { data } = await axios.get(`/api/orders/${hotel}/${room}`);
+    const { data } = await axios.get(`/api/orders/calendar/${hotel}/${room}`);
 
     dispatch({
       type: ORDER_CALENDAR_SUCCESS,
