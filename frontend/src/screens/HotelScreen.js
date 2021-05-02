@@ -6,11 +6,14 @@ import { Link, useLocation } from 'react-router-dom';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import RoomDetails from '../components/RoomDetails';
+import Calendar from '../components/Calendar';
 import { listHotelDetails } from '../store/actions/hotelActions';
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
-import { ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
+import { fetchCalendarBookings } from '../store/actions/orderActions';
+import { ORDER_CALENDAR_RESET, ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
 import initMapQuestMap from '../utils/mapquest';
+import getCalendarBookings from '../utils/calendarBookings';
 
 const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
@@ -31,19 +34,30 @@ const HotelScreen = ({ match, history }) => {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
+  const orderCalendar = useSelector(state => state.orderCalendar);
+  const { 
+    loading: loadingCalendar,
+    error: errorCalendar,
+    success: successCalendar,
+    data: dataCalendar
+  } = orderCalendar;
+
   const [roomChecked, setRoomChecked] = useState('');
   const [roomCheckedDetails, setRoomCheckedDetails] = useState({});
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(1);
+  const [calendarBookings, setCalendarBookings] = useState([]);
 
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
       dispatch({ type: ORDER_VALIDATE_RESET });
     }
+
     if (loading !== undefined && !loading) {
-      // Set loading to undefined somewhere so this block doesn't run twice
+      // @TODO: Set loading to undefined somewhere so this block doesn't run twice
+
       const qs = queryString.parse(location.search);
       if (qs.room && hotel.roomTypes) {
         // @TODO: refactor if else
@@ -56,6 +70,21 @@ const HotelScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, hotelId, hotel, loading, location]);
+
+  useEffect(() => {
+    if (roomChecked && !loading) {
+      dispatch(fetchCalendarBookings(hotel._id, roomChecked));
+    }
+  }, [dispatch, roomChecked, hotel, loading])
+
+  useEffect(() => {
+    if (loadingCalendar !== undefined && !loadingCalendar && dataCalendar) {
+      const daysBookings = [];
+      console.log('getCalendar running...')
+      getCalendarBookings(dataCalendar, daysBookings);
+      setCalendarBookings(daysBookings);
+    }
+  }, [loadingCalendar, dataCalendar])
 
   useEffect(() => {
     if (loading !== undefined && !loading) {
@@ -289,7 +318,19 @@ const HotelScreen = ({ match, history }) => {
       </Row>
       <Row>
         <Col>
-            <div id='map' style={{width: '100%', height: '530px'}}></div>
+          {loadingCalendar ? (
+            <Loader />
+          ) : roomCheckedDetails && calendarBookings.length >= 0 && (
+            <Calendar 
+              bookings={calendarBookings} 
+              availableRooms={roomCheckedDetails.availableRooms} 
+            />
+          )}
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <div id='map' style={{width: '100%', height: '530px'}}></div>
         </Col>
       </Row>
       </>

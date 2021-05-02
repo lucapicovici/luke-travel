@@ -13,7 +13,10 @@ import {
   ORDER_DETAILS_FAIL,
   ORDER_PAY_REQUEST,
   ORDER_PAY_SUCCESS,
-  ORDER_PAY_FAIL
+  ORDER_PAY_FAIL,
+  ORDER_CALENDAR_FAIL,
+  ORDER_CALENDAR_REQUEST,
+  ORDER_CALENDAR_SUCCESS
 } from '../constants/orderConstants';
 import { CART_RESET } from '../constants/cartConstants';
 import axios from 'axios';
@@ -163,5 +166,26 @@ export const payOrder = (orderId, paymentResult) => async(dispatch, getState) =>
         ? error.response.data.message
         : error.message
     });
+  }
+};
+
+export const fetchCalendarBookings = (hotel, room) => async(dispatch) => {
+  try {
+    dispatch({ type: ORDER_CALENDAR_REQUEST });
+
+    const { data } = await axios.get(`/api/orders/${hotel}/${room}`);
+
+    dispatch({
+      type: ORDER_CALENDAR_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_CALENDAR_FAIL,
+      payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    })
   }
 };

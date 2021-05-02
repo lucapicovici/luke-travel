@@ -129,9 +129,9 @@ const getMyOrders = asyncHandler(async(req, res) => {
 });
 
 /**
- * @desc    Returneaza comanda dupa ID
- * @route   GET /api/orders/:id
- * @access  Private
+ * @description   Returneaza comanda dupa ID
+ * @route         GET /api/orders/:id
+ * @access        Private
  */
 const getOrderById = asyncHandler(async(req, res) => {
   const order = await Order.findById(req.params.id).populate('user', 'name email');
@@ -145,9 +145,9 @@ const getOrderById = asyncHandler(async(req, res) => {
 });
 
 /**
- * @desc    Actualizeaza comanda ca fiind platita
- * @route   PUT /api/orders/:id/pay
- * @access  Private
+ * @description   Actualizeaza comanda ca fiind platita
+ * @route         PUT /api/orders/:id/pay
+ * @access        Private
  */
  const updateOrderToPaid = asyncHandler(async(req, res) => {
   const order = await Order.findById(req.params.id);
@@ -171,11 +171,40 @@ const getOrderById = asyncHandler(async(req, res) => {
   }
 });
 
+/**
+ * @description   Returneaza perioadele rezervarilor unui tip de camera dintr-un hotel
+ * @route         GET /api/orders/:hotel/:room?start=2021-04-01&end=2021-06-30
+ * @access        Public
+ */
+const getRoomOrdersDates = asyncHandler(async(req, res) => {
+  const query = {};
+
+  if (req.params.hotel) query['booking.hotel._id'] = req.params.hotel;
+  if (req.params.room) query['booking.room._id'] = req.params.room;
+  if (req.query.start) {
+    query['booking.checkIn'] = { $gte: new Date(req.query.start).toISOString() }
+  }
+  if (req.query.end) {
+    query['booking.checkOut'] = { $lt: new Date(req.query.end).toISOString() }
+  }
+  query.isPaid = true;
+
+  const orders = await Order.find(query).select('booking.checkIn booking.checkOut');
+
+  const results = orders.map(order => ({
+    checkIn: order.booking.checkIn,
+    checkOut: order.booking.checkOut
+  }));
+
+  res.status(200).json(results);
+});
+
 
 export {
   addOrderItems,
   validateOrder,
   getMyOrders,
   getOrderById,
-  updateOrderToPaid
+  updateOrderToPaid,
+  getRoomOrdersDates
 }

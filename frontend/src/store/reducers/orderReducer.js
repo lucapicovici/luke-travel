@@ -17,7 +17,11 @@ import {
   ORDER_PAY_SUCCESS,
   ORDER_PAY_FAIL,
   ORDER_PAY_RESET,
-  ORDER_CREATE_RESET
+  ORDER_CREATE_RESET,
+  ORDER_CALENDAR_REQUEST,
+  ORDER_CALENDAR_SUCCESS,
+  ORDER_CALENDAR_FAIL,
+  ORDER_CALENDAR_RESET
 } from '../constants/orderConstants';
 
 export const orderCreateReducer = (state={}, action) => {
@@ -130,3 +134,25 @@ export const orderPayReducer = (state={ }, action) => {
       return state;
   }
 };
+
+export const orderCalendarReducer = (state={ data: [] }, action) => {
+  switch(action.type) {
+    case ORDER_CALENDAR_REQUEST:
+      return { loading: true }
+    case ORDER_CALENDAR_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        data: action.payload
+      }
+    case ORDER_CALENDAR_FAIL:
+      return {
+        loading: false,
+        error: action.payload
+      }
+    case ORDER_CALENDAR_RESET:
+      return { data: [] }
+    default:
+      return state;
+  }
+}

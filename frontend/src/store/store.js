@@ -17,7 +17,8 @@ import {
   orderValidateReducer,
   orderListMyReducer,
   orderDetailsReducer,
-  orderPayReducer
+  orderPayReducer,
+  orderCalendarReducer
 } from './reducers/orderReducer';
 
 const reducer = combineReducers({
@@ -32,7 +33,8 @@ const reducer = combineReducers({
   orderValidate: orderValidateReducer,
   orderListMy: orderListMyReducer,
   orderDetails: orderDetailsReducer,
-  orderPay: orderPayReducer
+  orderPay: orderPayReducer,
+  orderCalendar: orderCalendarReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista
@@ -41,8 +43,8 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   : null;
 
 const bookingFromStorage = localStorage.getItem('booking') 
-? JSON.parse(localStorage.getItem('booking')) 
-: {};
+  ? JSON.parse(localStorage.getItem('booking')) 
+  : {};
 
 const shippingAddressFromStorage = localStorage.getItem('shippingAddress') 
   ? JSON.parse(localStorage.getItem('shippingAddress')) 
