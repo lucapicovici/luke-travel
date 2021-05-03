@@ -142,6 +142,10 @@ h3 {
   font-size: 0.95em;
 }
 
+#roomArea > *, #bookingArea > * {
+  margin-bottom: 50px;
+}
+
 /* -------------------- */
 /* --- Order Screen --- */
 /* -------------------- */

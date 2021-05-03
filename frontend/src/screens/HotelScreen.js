@@ -13,6 +13,11 @@ import { validateOrder } from '../store/actions/orderActions';
 import { fetchCalendarDaysBookings } from '../store/actions/orderActions';
 import { ORDER_CALENDAR_RESET, ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
 import initMapQuestMap from '../utils/mapquest';
+import {
+  getCurrentDay,
+  getNextDay,
+  getDaysRange
+} from '../utils/dates';
 
 const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
@@ -86,22 +91,22 @@ const HotelScreen = ({ match, history }) => {
   }, [hotel, loading]);
 
   useEffect(() => {
-    const addDaysToDate = (date, days) => {
-      let newDate = new Date(date);
-      newDate.setDate(newDate.getDate() + days);
-      return newDate;
-    }
+    // const addDaysToDate = (date, days) => {
+    //   let newDate = new Date(date);
+    //   newDate.setDate(newDate.getDate() + days);
+    //   return newDate;
+    // }
 
-    const getDaysRange = (start, end) => {
-      start = new Date(start);
-      end = new Date(end);
-      let range = 0, currentDate = start;
-      while (currentDate < end) {
-        range += 1;
-        currentDate = addDaysToDate(currentDate, 1);
-      }
-      return range;
-    }
+    // const getDaysRange = (start, end) => {
+    //   start = new Date(start);
+    //   end = new Date(end);
+    //   let range = 0, currentDate = start;
+    //   while (currentDate < end) {
+    //     range += 1;
+    //     currentDate = addDaysToDate(currentDate, 1);
+    //   }
+    //   return range;
+    // }
 
     if (successValidate) {
       const booking = {
@@ -143,18 +148,18 @@ const HotelScreen = ({ match, history }) => {
     setRoomCheckedDetails(findRoomById(e.target.value));
   }
 
-  const getCurrentDay = () => {
-    const today = new Date();
-    return today.toISOString().split('T')[0];
-  }
+  // const getCurrentDay = () => {
+  //   const today = new Date();
+  //   return today.toISOString().split('T')[0];
+  // }
 
-  const getNextDay = (date) => {
-    if (date) {
-      date = new Date(date);
-      date.setDate(date.getDate() + 1);
-      return date.toISOString().split('T')[0];
-    }
-  }
+  // const getNextDay = (date) => {
+  //   if (date) {
+  //     date = new Date(date);
+  //     date.setDate(date.getDate() + 1);
+  //     return date.toISOString().split('T')[0];
+  //   }
+  // }
 
   // Verifica disponibilitatea camerei prin apel API
   const checkAvailability = (e) => {
@@ -217,7 +222,7 @@ const HotelScreen = ({ match, history }) => {
           <h6>Choose a room</h6>
         </Col>
       </Row>
-      <Row>
+      <Row id='roomArea'>
         <Col md={5} lg={3}>
           <ButtonGroup toggle vertical>
             {hotel.roomTypes && hotel.roomTypes.map(room => (
@@ -251,8 +256,8 @@ const HotelScreen = ({ match, history }) => {
           )}
         </Col>
       </Row>
-      <Row>
-        <Col md={6} lg={3}>
+      <Row id='bookingArea'>
+        <Col lg={3}>
           <Form onSubmit={checkAvailability}>
             <Form.Group>
               <Form.Label>Check In</Form.Label>
@@ -297,22 +302,20 @@ const HotelScreen = ({ match, history }) => {
             </Button>
           </Form>
         </Col>
-        <Col md={6} lg={9}>
+        <Col lg={4}>
           {loadingValidate ? (
-            <Loader />
-          ) : errorValidate && (
-            <Message variant='danger'>{errorValidate}</Message>
+              <Loader />
+            ) : errorValidate && (
+              <Message variant='danger'>{errorValidate}</Message>
           )}
         </Col>
-      </Row>
-      <Row>
-        <Col>
+        <Col md={8} lg={5}>
           {loadingCalendar ? (
             <Loader />
           ) : roomCheckedDetails && dataCalendar && (
             <Calendar 
               daysBookings={dataCalendar} 
-              availableRooms={roomCheckedDetails.availableRooms} 
+              availableRooms={roomCheckedDetails.availableRooms}
             />
           )}
         </Col>

@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import Day from '../components/Day';
 
 const Frame = styled.div`
-  width: 400px;
+  min-width: 350px;
+  max-width: 450px;
+  width: 100%;
   border: 1px solid lightgrey;
   box-shadow: 2px 2px 2px #eee;
 `;
@@ -75,32 +77,6 @@ const Calendar = ({ daysBookings, availableRooms }) => {
       && d1.getFullYear() === d2.getFullYear();
   }
 
-  const constructArrayOfDays = () => {
-    const arr = Array(days[month] + (startDay - 1))
-      .fill(null)
-      .map((_, index) => {
-        const d = index - (startDay - 2);
-        let currentDate;
-        if (d > 0) {
-          currentDate = new Date(year, month, d);
-        }
-
-        let dayColor = 'white';
-
-        return (
-          <Day
-            key={index}
-            isToday={d > 0 && equalDates(currentDate, today)}
-            onClick={() => setDate(new Date(year, month, d))}
-            day={d > 0 ? d : ''}
-            info={'a'}
-            color={dayColor}
-          />
-        )
-      });
-    return arr;
-  }
-
   return (
     <Frame>
       <Header>
@@ -128,7 +104,6 @@ const Calendar = ({ daysBookings, availableRooms }) => {
                 exists = daysBookings.findIndex((obj) => (
                   (new Date(obj.date)).toISOString() === currentDate.toISOString()
                 ));
-                console.log(exists)
               }
       
               let dayColor = 'white';

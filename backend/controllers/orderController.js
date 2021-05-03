@@ -49,8 +49,8 @@ const validateOrder = asyncHandler(async(req, res) => {
   // Pentru hotelul afisat pe pagina
   // Cauta toate rezervarile camerei pentru care se va afla disponibilitatea in perioada aleasa
   const orders = await Order.find({
-    'booking.hotel' : hotel,
-    'booking.roomId' : roomId
+    'booking.hotel._id' : hotel,
+    'booking.room._id' : roomId
   }).select('booking');
   
   // Numarul rezervarilor care se suprapun cu perioada aleasa
