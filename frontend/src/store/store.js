@@ -6,10 +6,13 @@ import {
   hotelListReducer 
 } from './reducers/hotelReducer';
 import { 
+  userDeleteReducer,
   userDetailsReducer, 
+  userListReducer, 
   userLoginReducer,
   userRegisterReducer, 
-  userUpdateProfileReducer
+  userUpdateProfileReducer,
+  userUpdateReducer
 } from './reducers/userReducer';
 import { cartReducer } from './reducers/cartReducer';
 import {
@@ -28,6 +31,9 @@ const reducer = combineReducers({
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
   userUpdateProfile: userUpdateProfileReducer,
+  userList: userListReducer,
+  userDelete: userDeleteReducer,
+  userUpdate: userUpdateReducer,
   cart: cartReducer,
   orderCreate: orderCreateReducer,
   orderValidate: orderValidateReducer,
