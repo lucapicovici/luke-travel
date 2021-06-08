@@ -198,6 +198,16 @@ const getRoomCalendarBookings_days = asyncHandler(async(req, res) => {
   res.status(200).json(daysBookings);
 });
 
+/**
+ * @desc    Returneaza toate rezervarile
+ * @route   GET /api/orders
+ * @access  Private/Admin
+ */
+const getOrders = asyncHandler(async(req, res) => {
+  const orders = await Order.find({}).populate('user', 'id name');
+  res.status(200).json(orders);
+});
+
 
 export {
   addOrderItems,
@@ -205,5 +215,6 @@ export {
   getMyOrders,
   getOrderById,
   updateOrderToPaid,
-  getRoomCalendarBookings_days
+  getRoomCalendarBookings_days,
+  getOrders
 }

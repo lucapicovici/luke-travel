@@ -46,7 +46,7 @@ const HotelListAdmin = ({ history, match }) => {
       <Message variant='danger'>{error}</Message>
     ) : (
       <>
-      <h5>Admin Hotel List</h5>
+      <h4>Admin Hotel List</h4>
       <Row className='hotelListRow'>
         <Row>
           {hotels.map(hotel => (
