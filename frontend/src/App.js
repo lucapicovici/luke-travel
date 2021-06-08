@@ -15,6 +15,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import HotelListAdminScreen from './screens/HotelListAdminScreen';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
           <Route path='/order/:id' component={OrderScreen} />
           <Route path='/admin/user-list' component={UserListScreen} />
           <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+          <Route exact path='/admin/hotel-list' component={HotelListAdminScreen} />
+          <Route exact path='/admin/hotel-list/page/:pageNumber' component={HotelListAdminScreen} />
         </Container>
       </main>
       <Footer />

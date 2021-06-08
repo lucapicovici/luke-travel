@@ -1,4 +1,7 @@
 import { 
+  HOTEL_DELETE_FAIL,
+  HOTEL_DELETE_REQUEST,
+  HOTEL_DELETE_SUCCESS,
   HOTEL_DETAILS_FAIL,
   HOTEL_DETAILS_REQUEST,
   HOTEL_DETAILS_SUCCESS,
@@ -38,6 +41,19 @@ export const hotelDetailsReducer = (
         hotel: action.payload
       };
     case HOTEL_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const hotelDeleteReducer = (state={ }, action) => {
+  switch(action.type) {
+    case HOTEL_DELETE_REQUEST:
+      return { loading: true };
+    case HOTEL_DELETE_SUCCESS:
+      return { loading: false, success: true };
+    case HOTEL_DELETE_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

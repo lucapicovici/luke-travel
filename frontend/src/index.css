@@ -157,3 +157,11 @@ h3 {
 #shippingDetails p {
   margin-bottom: 10px;
 }
+
+/* ------------------------------- */
+/* --- Admin Hotel List Screen --- */
+/* ------------------------------- */
+.hotelListRightCol {
+  display: flex;
+  align-items: center;
+}

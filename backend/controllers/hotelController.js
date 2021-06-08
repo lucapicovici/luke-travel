@@ -42,7 +42,25 @@ const getHotelById = asyncHandler(async(req, res) => {
   }
 });
 
+/**
+ * @description   Sterge un hotel
+ * @route         DELETE /api/hotels/:id
+ * @access        Private/Admin
+ */
+const deleteHotel = asyncHandler(async(req, res) => {
+  const hotel = await Hotel.findById(req.params.id);
+
+  if (hotel) {
+    await hotel.deleteOne();
+    res.status(200).json({ message: 'Hotel removed' });
+  } else {
+    res.status(404);
+    throw new Error('Hotel not found');
+  }
+});
+
 export {
   getHotels,
-  getHotelById
+  getHotelById,
+  deleteHotel
 }
