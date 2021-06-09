@@ -199,13 +199,34 @@ const getRoomCalendarBookings_days = asyncHandler(async(req, res) => {
 });
 
 /**
- * @desc    Returneaza toate rezervarile
+ * @desc    Returneaza toate comenzile
  * @route   GET /api/orders
  * @access  Private/Admin
  */
 const getOrders = asyncHandler(async(req, res) => {
   const orders = await Order.find({}).populate('user', 'id name');
   res.status(200).json(orders);
+});
+
+/**
+ * @desc    Actualizeaza rezervarea ca fiind confirmata
+ * @route   PUT /api/orders/:id/deliver
+ * @access  Private/Admin
+ */
+const updateOrderToDelivered = asyncHandler(async(req, res) => {
+  const order = await Order.findById(req.params.id);
+
+  if (order) {
+    order.isDelivered = true;
+    order.deliveredAt = Date.now();
+
+    const updatedOrder = await order.save();
+
+    res.status(200).json(updatedOrder);
+  } else {
+    res.status(404);
+    throw new Error('Order not found');
+  }
 });
 
 
@@ -216,5 +237,6 @@ export {
   getOrderById,
   updateOrderToPaid,
   getRoomCalendarBookings_days,
-  getOrders
+  getOrders,
+  updateOrderToDelivered
 }

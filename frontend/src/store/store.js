@@ -23,7 +23,8 @@ import {
   orderDetailsReducer,
   orderPayReducer,
   orderCalendarReducer,
-  orderListReducer
+  orderListReducer,
+  orderDeliverReducer
 } from './reducers/orderReducer';
 
 const reducer = combineReducers({
@@ -44,7 +45,8 @@ const reducer = combineReducers({
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,
   orderCalendar: orderCalendarReducer,
-  orderList: orderListReducer
+  orderList: orderListReducer,
+  orderDeliver: orderDeliverReducer
 });
 
 // La initierea Redux store, se preiau informatiile din localStorage, daca exista

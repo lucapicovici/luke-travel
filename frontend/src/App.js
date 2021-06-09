@@ -9,7 +9,7 @@ import HotelScreen from './screens/HotelScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
-import ShippingScreen from './screens/ShippingScreen';
+import ClientScreen from './screens/ClientScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
@@ -31,7 +31,7 @@ function App() {
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
-          <Route path='/shipping' component={ShippingScreen} />
+          <Route path='/shipping' component={ClientScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/place-order' component={PlaceOrderScreen} />
           <Route path='/order/:id' component={OrderScreen} />

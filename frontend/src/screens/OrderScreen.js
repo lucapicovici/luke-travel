@@ -6,8 +6,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
-import { getOrderDetails, payOrder, listMyOrders } from '../store/actions/orderActions';
-import { ORDER_PAY_RESET } from '../store/constants/orderConstants';
+import { getOrderDetails, payOrder, listMyOrders, deliverOrder } from '../store/actions/orderActions';
+import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../store/constants/orderConstants';
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id;
@@ -22,6 +22,9 @@ const OrderScreen = ({ match, history }) => {
 
   const orderPay = useSelector(state => state.orderPay);
   const { loading: loadingPay, success: successPay } = orderPay;
+
+  const orderDeliver = useSelector(state => state.orderDeliver);
+  const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
@@ -54,8 +57,9 @@ const OrderScreen = ({ match, history }) => {
       document.body.appendChild(script);
     };
 
-    if (!order || successPay || order._id !== orderId) {
+    if (!order || successPay || successDeliver || order._id !== orderId) {
       dispatch({ type: ORDER_PAY_RESET });
+      dispatch({ type: ORDER_DELIVER_RESET });
       dispatch(getOrderDetails(orderId));
     } else if(!order.isPaid) {
       if (!window.paypal) {
@@ -64,7 +68,7 @@ const OrderScreen = ({ match, history }) => {
         setSdkReady(true);
       }
     }
-  }, [dispatch, history, userInfo, order, orderId, successPay, location]);  // ?location
+  }, [dispatch, history, userInfo, order, orderId, successPay, location, successDeliver]);
 
   const successPaymentHandler = (paymentResult) => {
     dispatch(payOrder(orderId, paymentResult));
@@ -72,7 +76,7 @@ const OrderScreen = ({ match, history }) => {
   };
 
   const deliverHandler = () => {
-
+    dispatch(deliverOrder(order));
   }
 
   const arrangeDate = (date) => {
@@ -88,7 +92,7 @@ const OrderScreen = ({ match, history }) => {
           <h4 id='orderId'>Order {order._id}</h4>
           <ListGroup variant='flush'>
             <ListGroup.Item id='shippingDetails'>
-              <h3>Shipping</h3>
+              <h3>Client</h3>
               <p>
                 Name: <strong>{order.user.name}</strong>
               </p>
@@ -102,9 +106,9 @@ const OrderScreen = ({ match, history }) => {
               <p>Country: <strong>{order.shippingAddress.country}</strong></p>
 
               {order.isDelivered ? (
-                <Message variant='success'>Delivered on {order.deliveredAt}</Message>
+                <Message variant='success'>Booking Confirmation Delivered on {order.deliveredAt}</Message>
               ) : (
-                <Message variant='danger'>Not Delivered</Message>
+                <Message variant='danger'>Booking Confirmation Not Delivered</Message>
               )}
             </ListGroup.Item>
 
@@ -188,6 +192,7 @@ const OrderScreen = ({ match, history }) => {
                 </ListGroup.Item>
               )}
 
+              {loadingDeliver && <Loader />}
               {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
                 <ListGroup.Item>
                   <Button type='button' className='btn btn-block' onClick={deliverHandler}>

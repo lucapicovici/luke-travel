@@ -57,7 +57,7 @@ const PlaceOrderScreen = ({ history }) => {
         <Col md={8}>
           <ListGroup variant='flush'>
             <ListGroup.Item>
-              <h3>Shipping</h3>
+              <h3>Client</h3>
               <p>Address: <strong>{cart.shippingAddress.address}</strong></p>
               <p>City: <strong>{cart.shippingAddress.city}</strong></p>
               <p>Postal Code: <strong>{cart.shippingAddress.postalCode}</strong></p>
