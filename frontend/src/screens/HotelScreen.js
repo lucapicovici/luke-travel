@@ -207,7 +207,7 @@ const HotelScreen = ({ match, history }) => {
       </Row>
       <Row>
         <Col>
-          <Carousel interval={4000} pause='hover' className='bg-primary' id='hotelCarousel'>
+          <Carousel interval={3000} pause='hover' className='bg-primary' id='hotelCarousel'>
             {hotel.images && hotel.images.map(image => (
               <Carousel.Item key={image._id}>
                 <Image src={image.src} alt={hotel.name} fluid />
@@ -242,7 +242,7 @@ const HotelScreen = ({ match, history }) => {
           </ButtonGroup>
         </Col>
         <Col md={7} lg={5}>
-          <Carousel interval={100} pause='hover' className='bg-dark' id='roomCarousel'>
+          <Carousel interval={2000} pause='hover' className='bg-dark' id='roomCarousel'>
             {roomCheckedDetails && roomCheckedDetails.images && roomCheckedDetails.images.map(image => (
               <Carousel.Item key={image._id}>
                 <Image src={image.src} alt={hotel.name} fluid />

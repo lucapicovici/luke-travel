@@ -7,7 +7,10 @@ import {
   HOTEL_DETAILS_FAIL,
   HOTEL_DELETE_FAIL,
   HOTEL_DELETE_REQUEST,
-  HOTEL_DELETE_SUCCESS
+  HOTEL_DELETE_SUCCESS,
+  HOTEL_UPDATE_REQUEST,
+  HOTEL_UPDATE_SUCCESS,
+  HOTEL_UPDATE_FAIL
 } from '../constants/hotelConstants';
 import axios from 'axios';
 
@@ -76,5 +79,40 @@ export const deleteHotel = (id) => async (dispatch, getState) => {
         ? error.response.data.message
         : error.message
     })
+  }
+};
+
+export const updateHotel = (hotel) => async(dispatch, getState) => {
+  try {
+    dispatch({ type: HOTEL_UPDATE_REQUEST });
+
+    const { userLogin: { userInfo } } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    };
+
+    const { data } = await axios.put(`/api/hotels/${hotel._id}`, hotel, config);
+
+    dispatch({ 
+      type: HOTEL_UPDATE_SUCCESS,
+      payload: data
+    });
+
+    dispatch({
+      type: HOTEL_DETAILS_SUCCESS,
+      payload: data
+    });
+  } catch (error) {
+    dispatch({
+      type: HOTEL_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    });
   }
 };

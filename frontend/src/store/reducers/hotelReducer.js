@@ -7,7 +7,11 @@ import {
   HOTEL_DETAILS_SUCCESS,
   HOTEL_LIST_FAIL, 
   HOTEL_LIST_REQUEST, 
-  HOTEL_LIST_SUCCESS 
+  HOTEL_LIST_SUCCESS, 
+  HOTEL_UPDATE_FAIL, 
+  HOTEL_UPDATE_REQUEST,
+  HOTEL_UPDATE_RESET,
+  HOTEL_UPDATE_SUCCESS
 } from "../constants/hotelConstants";
 
 export const hotelListReducer = (state={ hotels: [] }, action) => {
@@ -55,6 +59,21 @@ export const hotelDeleteReducer = (state={ }, action) => {
       return { loading: false, success: true };
     case HOTEL_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const hotelUpdateReducer = (state={ hotel: {} }, action) => {
+  switch(action.type) {
+    case HOTEL_UPDATE_REQUEST:
+      return { loading: true };
+    case HOTEL_UPDATE_SUCCESS:
+      return { loading: false, success: true, hotel: action.payload };
+    case HOTEL_UPDATE_FAIL:
+      return { loading: false, error: action.payload };
+    case HOTEL_UPDATE_RESET:
+      return { hotel: {} };
     default:
       return state;
   }

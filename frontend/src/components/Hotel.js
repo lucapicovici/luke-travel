@@ -7,7 +7,7 @@ const Hotel = ({ hotel }) => {
     <div className="card mb-3 hotelListCard">
       <div className="row no-gutters">
         <Link className="col-md-4 imgWrapper" to={`/hotel/${hotel._id}`}>
-          <img src={hotel.images[0].src} alt={hotel.name} />
+          <img src={hotel.images && hotel.images[0] && hotel.images[0].src || ''} alt={hotel.name} />
         </Link>
         <div className="col-md-8">
           <div className="card-body">

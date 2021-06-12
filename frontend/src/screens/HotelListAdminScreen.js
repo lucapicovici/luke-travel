@@ -55,12 +55,12 @@ const HotelListAdmin = ({ history, match }) => {
               <Hotel hotel={hotel}/>
             </Col>
             <Col md={3} className='hotelListRightCol'>
-              <LinkContainer to={`/admin/hotel-list/${hotel._id}/edit`}>
-                <Button variant='light' className='btn-md'>
+              <LinkContainer to={`/admin/hotel/${hotel._id}/edit`}>
+                <Button variant='light' className='btn-lg'>
                   <i className='fas fa-edit'></i>
                 </Button>
               </LinkContainer>
-              <Button variant='danger' className='btn-md' onClick={() => deleteHandler(hotel._id)}>
+              <Button variant='danger' className='btn-lg' onClick={() => deleteHandler(hotel._id)}>
                 <i className='fas fa-trash'></i>
               </Button>
             </Col>

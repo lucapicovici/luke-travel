@@ -4,7 +4,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { 
   hotelDeleteReducer,
   hotelDetailsReducer, 
-  hotelListReducer 
+  hotelListReducer, 
+  hotelUpdateReducer
 } from './reducers/hotelReducer';
 import { 
   userDeleteReducer,
@@ -31,6 +32,7 @@ const reducer = combineReducers({
   hotelList: hotelListReducer,
   hotelDetails: hotelDetailsReducer,
   hotelDelete: hotelDeleteReducer,
+  hotelUpdate: hotelUpdateReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,

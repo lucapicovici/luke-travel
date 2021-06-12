@@ -59,8 +59,40 @@ const deleteHotel = asyncHandler(async(req, res) => {
   }
 });
 
+/**
+ * @desc    Actualizeaza un hotel
+ * @route   PUT /api/hotels/:id
+ * @access  Private/Admin
+ */
+const updateHotel = asyncHandler(async(req, res) => {
+  const { 
+    name, 
+    type, 
+    address,
+    images,
+    roomTypes 
+  } = req.body;
+  
+  const hotel = await Hotel.findById(req.params.id);
+
+  if (hotel) {
+    hotel.name = name;
+    hotel.type = type;
+    hotel.address = address;
+    hotel.images = images;
+    hotel.roomTypes = roomTypes;
+
+    const updatedHotel = await hotel.save();
+    res.status(201).json(updatedHotel);
+  } else {
+    res.status(404);
+    throw new Error('Hotel not found');
+  }
+});
+
 export {
   getHotels,
   getHotelById,
-  deleteHotel
+  deleteHotel,
+  updateHotel
 }
