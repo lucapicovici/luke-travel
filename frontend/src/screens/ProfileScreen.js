@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { getUserDetails, updateUserProfile } from '../store/actions/userActions.js';
 import { USER_UPDATE_PROFILE_RESET } from '../store/constants/userConstants';
 import { listMyOrders } from '../store/actions/orderActions';
@@ -58,6 +59,7 @@ const ProfileScreen = ({ history }) => {
 
   return (
     <Row>
+      <Meta title='My Profile' />
       <Col md={3}>
         <h3>Account</h3>
         {message && <Message variant='danger'>{message}</Message>}

@@ -6,6 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
+import Meta from '../components/Meta';
 import { getOrderDetails, payOrder, listMyOrders, deliverOrder } from '../store/actions/orderActions';
 import { ORDER_DELIVER_RESET, ORDER_PAY_RESET } from '../store/constants/orderConstants';
 
@@ -87,6 +88,7 @@ const OrderScreen = ({ match, history }) => {
 
   return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
     : <>
+      <Meta title='View Order' />
       <Row>
         <Col md={8}>
           <h4 id='orderId'>Order {order._id}</h4>

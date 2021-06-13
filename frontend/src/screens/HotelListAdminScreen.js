@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Hotel from '../components/Hotel';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 import { listHotels, deleteHotel } from '../store/actions/hotelActions';
 
 const HotelListAdmin = ({ history, match }) => {
@@ -38,6 +39,7 @@ const HotelListAdmin = ({ history, match }) => {
 
   return(
     <>
+    <Meta title='Admin Hotel List' />
     {loadingDelete ? <Loader /> : errorDelete && <Message variant='danger'>{errorDelete}</Message>}
 
     {loading ? (

@@ -5,6 +5,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import Hotel from '../components/Hotel';
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta';
 import { listHotels } from '../store/actions/hotelActions';
 
 const HotelListScreen = ({ match }) => {
@@ -21,6 +22,7 @@ const HotelListScreen = ({ match }) => {
 
   return(
     <>
+    <Meta title='Luke Travel - Showing Results'/>
     {loading ? (
       <Loader />
     ) : error ? (

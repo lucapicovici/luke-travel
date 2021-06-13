@@ -7,6 +7,7 @@ import Message from '../components/Message';
 import Loader from '../components/Loader';
 import RoomDetails from '../components/RoomDetails';
 import Calendar from '../components/Calendar';
+import Meta from '../components/Meta';
 import { listHotelDetails } from '../store/actions/hotelActions';
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
@@ -184,6 +185,7 @@ const HotelScreen = ({ match, history }) => {
 
   return(
     <>
+    <Meta title={hotel.name} />
     <Link className='btn btn-outline-secondary my-3' to='/hotels'>
       Go Back
      </Link>
@@ -223,7 +225,7 @@ const HotelScreen = ({ match, history }) => {
         </Col>
       </Row>
       <Row id='roomArea'>
-        <Col md={5} lg={3}>
+        <Col md={5} lg={5}>
           <ButtonGroup toggle vertical>
             {hotel.roomTypes && hotel.roomTypes.map(room => (
               <ToggleButton
@@ -241,7 +243,7 @@ const HotelScreen = ({ match, history }) => {
             ))}
           </ButtonGroup>
         </Col>
-        <Col md={7} lg={5}>
+        <Col md={7} lg={7}>
           <Carousel interval={2000} pause='hover' className='bg-dark' id='roomCarousel'>
             {roomCheckedDetails && roomCheckedDetails.images && roomCheckedDetails.images.map(image => (
               <Carousel.Item key={image._id}>
@@ -249,11 +251,6 @@ const HotelScreen = ({ match, history }) => {
               </Carousel.Item>
             ))}
           </Carousel>
-        </Col>
-        <Col md={12} lg={4}>
-          {roomCheckedDetails && (
-            <RoomDetails room={roomCheckedDetails} />
-          )}
         </Col>
       </Row>
       <Row id='bookingArea'>
@@ -318,6 +315,16 @@ const HotelScreen = ({ match, history }) => {
               availableRooms={roomCheckedDetails.availableRooms}
             />
           )}
+        </Col>
+      </Row>
+      <Row>
+        <Col md={{order: 'last'}}>
+          {roomCheckedDetails && (
+            <RoomDetails room={roomCheckedDetails} />
+          )}
+        </Col>
+        <Col md={6}>
+          Reviews here
         </Col>
       </Row>
       <Row>

@@ -3,6 +3,7 @@ import { Button, Row, Col, ListGroup, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
+import Meta from '../components/Meta';
 import { createOrder, listMyOrders } from '../store/actions/orderActions';
 import { Link, useLocation } from 'react-router-dom';
 import { ORDER_CREATE_RESET } from '../store/constants/orderConstants';
@@ -52,6 +53,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
+      <Meta title='Place Order' />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

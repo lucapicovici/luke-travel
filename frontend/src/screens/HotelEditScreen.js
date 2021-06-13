@@ -6,6 +6,7 @@ import cloneDeep from 'lodash/cloneDeep.js';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 import { listHotelDetails, updateHotel } from '../store/actions/hotelActions';
 import { HOTEL_UPDATE_RESET } from '../store/constants/hotelConstants';
 
@@ -102,6 +103,7 @@ const HotelEditScreen = ({ match, history }) => {
 
   return (
     <>
+      <Meta title={`Edit ${hotel.name}`} />
       <Link to='/admin/hotel-list' className='btn btn-light my-3'>
         Go Back
       </Link>
@@ -114,7 +116,6 @@ const HotelEditScreen = ({ match, history }) => {
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        
           <FormContainer>
             <h3>Edit Hotel</h3>
             <Form onSubmit={submitHandler}>

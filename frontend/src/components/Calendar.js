@@ -20,6 +20,21 @@ const Header = styled.div`
   background-color: #f5f6fa;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+`;
+
+const Box = styled.div`
+  width: 20px;
+  height: 20px;
+  border: 1px solid black;
+  background-color: ${props => props.color ? props.color : 'white'}
+  padding-top: 5px;
+
+`;
+
 const Button = styled.div`
   cursor: pointer;
 `;
@@ -78,6 +93,7 @@ const Calendar = ({ daysBookings, availableRooms }) => {
   }
 
   return (
+    <>
     <Frame>
       <Header>
         <Button onClick={() => setDate(new Date(year, month-1, day))}>Prev</Button>
@@ -130,6 +146,12 @@ const Calendar = ({ daysBookings, availableRooms }) => {
         )}
       </Body>
     </Frame>
+    <Footer>
+      <Box color='red'/> &nbsp; - fully booked &nbsp;
+      <Box color='yellow'/> &nbsp; - partially booked &nbsp;
+      <Box/> &nbsp; - available
+    </Footer>
+    </>
   );
 }
 

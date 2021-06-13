@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
+import Meta from '../components/Meta';
 import { getUserDetails, updateUser } from '../store/actions/userActions.js';
 import { USER_UPDATE_RESET } from '../store/constants/userConstants';
 
@@ -45,6 +46,7 @@ const UserEditScreen = ({ match, history }) => {
 
   return (
     <>
+      <Meta title={`Edit user ${user.email}`} />
       <Link to='/admin/user-list' className='btn btn-light my-3'>
         Go Back
       </Link>
