@@ -121,7 +121,7 @@ h3 {
 #roomCarousel .carousel-item-prev,
 #roomCarousel .carousel-item.active {
   display: flex;
-  height: 200px;
+  height: 250px;
 }
 
 #roomCarousel.carousel img {

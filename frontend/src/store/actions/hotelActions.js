@@ -10,7 +10,13 @@ import {
   HOTEL_DELETE_SUCCESS,
   HOTEL_UPDATE_REQUEST,
   HOTEL_UPDATE_SUCCESS,
-  HOTEL_UPDATE_FAIL
+  HOTEL_UPDATE_FAIL,
+  HOTEL_CREATE_REVIEW_REQUEST,
+  HOTEL_CREATE_REVIEW_SUCCESS,
+  HOTEL_CREATE_REVIEW_FAIL,
+  HOTEL_DELETE_REVIEW_REQUEST,
+  HOTEL_DELETE_REVIEW_SUCCESS,
+  HOTEL_DELETE_REVIEW_FAIL
 } from '../constants/hotelConstants';
 import axios from 'axios';
 
@@ -109,6 +115,60 @@ export const updateHotel = (hotel) => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: HOTEL_UPDATE_FAIL,
+      payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    });
+  }
+};
+
+export const createHotelReview = (hotelId, review) => async(dispatch, getState) => {
+  try {
+    dispatch({ type: HOTEL_CREATE_REVIEW_REQUEST });
+
+    const { userLogin: { userInfo } } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    };
+
+    await axios.post(`/api/hotels/${hotelId}/reviews`, review, config);
+
+    dispatch({ type: HOTEL_CREATE_REVIEW_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: HOTEL_CREATE_REVIEW_FAIL,
+      payload:
+        error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message
+    });
+  }
+};
+
+export const deleteHotelReview = (hotelId, reviewId) => async(dispatch, getState) => {
+  try {
+    dispatch({ type: HOTEL_DELETE_REVIEW_REQUEST });
+
+    const { userLogin: { userInfo } } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    };
+
+    await axios.delete(`/api/hotels/${hotelId}/reviews/${reviewId}`, config);
+
+    dispatch({ type: HOTEL_DELETE_REVIEW_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: HOTEL_DELETE_REVIEW_FAIL,
       payload:
         error.response && error.response.data.message
         ? error.response.data.message

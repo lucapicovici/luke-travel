@@ -7,7 +7,7 @@ const Hotel = ({ hotel }) => {
     <div className="card mb-3 hotelListCard">
       <div className="row no-gutters">
         <Link className="col-md-4 imgWrapper" to={`/hotel/${hotel._id}`}>
-          <img src={hotel.images && hotel.images[0] && hotel.images[0].src || ''} alt={hotel.name} />
+          <img src={(hotel.images && hotel.images[0] && hotel.images[0].src) || ''} alt={hotel.name} />
         </Link>
         <div className="col-md-8">
           <div className="card-body">
@@ -22,7 +22,7 @@ const Hotel = ({ hotel }) => {
             </div>
             <p className="card-text type">{hotel.type}</p>
             <p className="card-text description">{hotel.description}</p>
-            <p className="card-text address"><small className="text-muted">{hotel.address}</small></p>
+            <p className="card-text address"><small className="text-muted">{hotel.location && hotel.location.formattedAddress}</small></p>
           </div>
         </div>
       </div>

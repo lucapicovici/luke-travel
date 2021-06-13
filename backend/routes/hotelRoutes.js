@@ -4,11 +4,16 @@ import {
   getHotels,
   getHotelById,
   deleteHotel,
-  updateHotel
+  updateHotel,
+  createHotelReview,
+  deleteHotelReview
 } from '../controllers/hotelController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
 router.route('/').get(getHotels);
+
+router.route('/:id/reviews').post(protect, createHotelReview);
+router.route('/:id/reviews/:reviewId').delete(protect, admin, deleteHotelReview);
 
 router.route('/:id')
   .get(getHotelById)

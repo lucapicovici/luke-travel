@@ -147,9 +147,9 @@ const Calendar = ({ daysBookings, availableRooms }) => {
       </Body>
     </Frame>
     <Footer>
-      <Box color='red'/> &nbsp; - fully booked &nbsp;
-      <Box color='yellow'/> &nbsp; - partially booked &nbsp;
-      <Box/> &nbsp; - available
+      <Box color='red'/> &nbsp; fully booked &nbsp;
+      <Box color='yellow'/> &nbsp; partially booked &nbsp;
+      <Box/> &nbsp; available
     </Footer>
     </>
   );

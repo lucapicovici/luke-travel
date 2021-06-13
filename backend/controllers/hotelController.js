@@ -90,9 +90,77 @@ const updateHotel = asyncHandler(async(req, res) => {
   }
 });
 
+/**
+ * @desc    Adauga o recenzie
+ * @route   POST /api/hotels/:id/reviews
+ * @access  Private
+ */
+const createHotelReview = asyncHandler(async(req, res) => {
+  const { rating, comment } = req.body;
+  
+  const hotel = await Hotel.findById(req.params.id);
+
+  if (hotel) {
+    // Verifica daca utilizatorul logat a adaugat deja o recenzie
+    const alreadyReviewed = hotel.reviews.find(review => review.user.toString() === req.user._id.toString());
+
+    if (alreadyReviewed) {
+      res.status(400);
+      throw new Error('Hotel already reviewed');
+    }
+
+    const review = {
+      name: req.user.name,
+      rating: Number(rating),
+      comment,
+      user: req.user._id
+    };
+
+    hotel.reviews.push(review);
+    hotel.numReviews = hotel.reviews.length;
+
+    // Calcularea mediei aritmetice a recenziilor
+    hotel.rating = hotel.reviews.reduce((acc, item) => item.rating + acc, 0)
+      / hotel.reviews.length;
+
+    await hotel.save();
+    res.status(201).json({ message: 'Review added' });
+  } else {
+    res.status(404);
+    throw new Error('Hotel not found');
+  }
+});
+
+/**
+ * @desc    Sterge o recenzie
+ * @route   DELETE /api/hotels/:id/reviews/:reviewId
+ * @access  Private
+ */
+const deleteHotelReview = asyncHandler(async(req, res) => {
+  const hotel = await Hotel.findById(req.params.id);
+
+  if (!hotel) {
+    res.status(404);
+    throw new Error('Hotel not found');
+  }
+
+  const reviews = hotel.reviews.filter(rev => rev._id != req.params.reviewId);
+  
+  if (reviews.length === hotel.reviews.length) {
+    res.status(404);
+    throw new Error('Review not found');
+  }
+  
+  hotel.reviews = reviews;
+  await hotel.save();
+  res.status(200).json({ message: 'Deleted review' });
+});
+
 export {
   getHotels,
   getHotelById,
   deleteHotel,
-  updateHotel
+  updateHotel,
+  createHotelReview,
+  deleteHotelReview
 }

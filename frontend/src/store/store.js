@@ -5,6 +5,8 @@ import {
   hotelDeleteReducer,
   hotelDetailsReducer, 
   hotelListReducer, 
+  hotelReviewCreateReducer, 
+  hotelReviewDeleteReducer, 
   hotelUpdateReducer
 } from './reducers/hotelReducer';
 import { 
@@ -33,6 +35,8 @@ const reducer = combineReducers({
   hotelDetails: hotelDetailsReducer,
   hotelDelete: hotelDeleteReducer,
   hotelUpdate: hotelUpdateReducer,
+  hotelReviewCreate: hotelReviewCreateReducer,
+  hotelReviewDelete: hotelReviewDeleteReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,

@@ -64,6 +64,7 @@ const Rating = ({ value, text, color }) => {
 
         </i>
       </span>
+      &nbsp;
       <span>{text && text}</span>
     </div>
   )
@@ -74,10 +75,9 @@ Rating.defaultProps = {
 }
 
 Rating.propTypes = {
-  // Type-check the props
   value: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   color: PropTypes.string
 }
 
-export default Rating
+export default Rating;

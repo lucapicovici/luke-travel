@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button } from 'react-bootstrap';
+import { Row, Col, Image, Carousel, ButtonGroup, ToggleButton, Form, Button, ListGroup } from 'react-bootstrap';
 import { Link, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import RoomDetails from '../components/RoomDetails';
 import Calendar from '../components/Calendar';
 import Meta from '../components/Meta';
-import { listHotelDetails } from '../store/actions/hotelActions';
+import Rating from '../components/Rating';
+import { listHotelDetails, createHotelReview, deleteHotelReview } from '../store/actions/hotelActions';
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
 import { fetchCalendarDaysBookings } from '../store/actions/orderActions';
@@ -19,6 +21,7 @@ import {
   getNextDay,
   getDaysRange
 } from '../utils/dates';
+import { HOTEL_CREATE_REVIEW_RESET, HOTEL_DELETE_REVIEW_RESET } from '../store/constants/hotelConstants';
 
 const HotelScreen = ({ match, history }) => {
   const hotelId = match.params.id;
@@ -47,16 +50,25 @@ const HotelScreen = ({ match, history }) => {
     data: dataCalendar
   } = orderCalendar;
 
+  const hotelReviewCreate = useSelector(state => state.hotelReviewCreate);
+  const { success: successHotelReview, error: errorHotelReview } = hotelReviewCreate;
+
+  const hotelReviewDelete = useSelector(state => state.hotelReviewDelete);
+  const { loading: loadingReviewDelete, success: successReviewDelete, error: errorReviewDelete } = hotelReviewDelete;
+
   const [roomChecked, setRoomChecked] = useState('');
   const [roomCheckedDetails, setRoomCheckedDetails] = useState({});
   const [checkIn, setCheckIn] = useState('');
   const [checkOut, setCheckOut] = useState('');
   const [adults, setAdults] = useState(1);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState('');
 
   useEffect(() => {
     if (hotel._id !== hotelId && !loading) {
       dispatch(listHotelDetails(hotelId));
       dispatch({ type: ORDER_VALIDATE_RESET });
+      dispatch({ type: HOTEL_CREATE_REVIEW_RESET });
     }
 
     if (loading !== undefined && !loading) {
@@ -74,6 +86,27 @@ const HotelScreen = ({ match, history }) => {
       }
     }
   }, [dispatch, hotelId, hotel, loading, location]);
+
+  useEffect(() => {
+    // Recenzii hotel
+    if (successHotelReview) {
+      alert('Review Submitted!');
+      setRating(0);
+      setComment('');
+      dispatch({ type: HOTEL_CREATE_REVIEW_RESET });
+      dispatch(listHotelDetails(hotelId));
+    }
+  }, [dispatch, hotelId, successHotelReview]);
+
+  useEffect(() => {
+    if (successReviewDelete) {
+      setRating(0);
+      setComment('');
+      dispatch(listHotelDetails(hotelId));
+      dispatch({ type: HOTEL_DELETE_REVIEW_RESET });
+      dispatch({ type: HOTEL_CREATE_REVIEW_RESET });
+    }
+  }, [dispatch, hotelId, successReviewDelete]);
 
   useEffect(() => {
     if (roomChecked && !loading) {
@@ -183,6 +216,34 @@ const HotelScreen = ({ match, history }) => {
     }
   }
 
+  const reviewSubmitHandler = (e) => {
+    e.preventDefault();
+    dispatch(createHotelReview(hotelId, {
+      rating,
+      comment
+    }));
+  };
+
+  const reviewDelete = (reviewId) => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(deleteHotelReview(hotelId, reviewId));
+    }
+  }
+
+  const RatingNumber = styled.div`
+    width: 30px;
+    height: 30px;
+    padding: 19px;
+    background-color: #4fb7f0;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15%;
+    font-size: 1.5em;
+    color: white;
+  `;
+
   return(
     <>
     <Meta title={hotel.name} />
@@ -196,9 +257,16 @@ const HotelScreen = ({ match, history }) => {
     ) : (
       <>
       <Row>
-        <Col className='hotelScreenTitle'>
-          <span id='hotelType'>{hotel.type}</span>
-          <span id='hotelName'>{hotel.name}</span>
+        <Col className='hotelScreenTitle' style={{display: 'flex', justifyContent: 'space-between'}}>
+          <div style={{alignItems: 'center', display: 'flex'}}>
+            <span id='hotelType'>{hotel.type}</span>
+            <span id='hotelName'>{hotel.name}</span>
+          </div>
+
+          <div style={{alignItems: 'center', display: 'flex'}}>
+            <RatingNumber>{hotel.rating}</RatingNumber>
+            <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
+          </div>
         </Col>
       </Row>
       <Row>
@@ -221,7 +289,7 @@ const HotelScreen = ({ match, history }) => {
       <hr></hr>
       <Row>
         <Col>
-          <h6>Choose a room</h6>
+          <h5>Choose a room</h5>
         </Col>
       </Row>
       <Row id='roomArea'>
@@ -317,14 +385,77 @@ const HotelScreen = ({ match, history }) => {
           )}
         </Col>
       </Row>
-      <Row>
+      <Row style={{marginBottom: '50px'}}>
         <Col md={{order: 'last'}}>
           {roomCheckedDetails && (
             <RoomDetails room={roomCheckedDetails} />
           )}
         </Col>
         <Col md={6}>
-          Reviews here
+          <h5>Reviews</h5>
+          {hotel.reviews.length === 0 && <Message>No Reviews</Message>}
+          {userInfo && userInfo.isAdmin && errorReviewDelete && (
+            <Message variant='danger'>{errorReviewDelete}</Message>
+          )}
+          <ListGroup variant='flush'>
+            {hotel.reviews.map(review => (
+              <ListGroup.Item key={review._id}>
+                {userInfo && userInfo.isAdmin ? (
+                  <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <strong>{review.name}</strong>
+                    <Button variant='danger' className='btn-sm' onClick={() => reviewDelete(review._id)}>
+                      <i className='fas fa-trash'></i>
+                    </Button>
+                  </div>
+                ) : (
+                  <strong>{review.name}</strong>
+                )}
+                <Rating value={review.rating} />
+                <p>{review.createdAt.substring(0, 10)}</p>
+                <p style={{wordBreak: 'break-word'}}>{review.comment}</p>
+              </ListGroup.Item>
+            ))}
+            <ListGroup.Item>
+              <h5>Write a Customer Review</h5>
+              {errorHotelReview && <Message variant='danger'>{errorHotelReview}</Message>}
+              {userInfo ? (
+                <Form onSubmit={reviewSubmitHandler}>
+                  <Form.Group controlId='rating'>
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control 
+                      as='select' 
+                      value={rating} 
+                      onChange={(e) => setRating(e.target.value)}
+                    >
+                      <option value=''>Select...</option>
+                      <option value='1'>1 - Poor</option>
+                      <option value='2'>2 - Fair</option>
+                      <option value='3'>3 - Good</option>
+                      <option value='4'>4 - Very Good</option>
+                      <option value='5'>5 - Excellent</option>
+                    </Form.Control>
+                  </Form.Group>
+                  <Form.Group controlId='comment'>
+                    <Form.Label>Comment</Form.Label>
+                    <Form.Control
+                      as='textarea'
+                      row='3'
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    ></Form.Control>
+                  </Form.Group>
+                  <Button type='submit' variant='primary'>
+                    Submit
+                  </Button>
+                </Form>
+              ) : (
+                <Message>
+                  Please <Link to='/login'>sign in</Link>{' '}
+                  to write a review
+                </Message>
+              )}
+            </ListGroup.Item>
+          </ListGroup>
         </Col>
       </Row>
       <Row>

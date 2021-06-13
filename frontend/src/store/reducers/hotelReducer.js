@@ -1,6 +1,15 @@
 import { 
+  HOTEL_CREATE_REVIEW_FAIL,
+  HOTEL_CREATE_REVIEW_REQUEST,
+  HOTEL_CREATE_REVIEW_RESET,
+  HOTEL_CREATE_REVIEW_SUCCESS,
   HOTEL_DELETE_FAIL,
   HOTEL_DELETE_REQUEST,
+  HOTEL_DELETE_RESET,
+  HOTEL_DELETE_REVIEW_FAIL,
+  HOTEL_DELETE_REVIEW_REQUEST,
+  HOTEL_DELETE_REVIEW_RESET,
+  HOTEL_DELETE_REVIEW_SUCCESS,
   HOTEL_DELETE_SUCCESS,
   HOTEL_DETAILS_FAIL,
   HOTEL_DETAILS_REQUEST,
@@ -59,6 +68,8 @@ export const hotelDeleteReducer = (state={ }, action) => {
       return { loading: false, success: true };
     case HOTEL_DELETE_FAIL:
       return { loading: false, error: action.payload };
+    case HOTEL_DELETE_RESET:
+      return {};
     default:
       return state;
   }
@@ -74,6 +85,36 @@ export const hotelUpdateReducer = (state={ hotel: {} }, action) => {
       return { loading: false, error: action.payload };
     case HOTEL_UPDATE_RESET:
       return { hotel: {} };
+    default:
+      return state;
+  }
+};
+
+export const hotelReviewCreateReducer = (state={ }, action) => {
+  switch(action.type) {
+    case HOTEL_CREATE_REVIEW_REQUEST:
+      return { loading: true };
+    case HOTEL_CREATE_REVIEW_SUCCESS:
+      return { loading: false, success: true };
+    case HOTEL_CREATE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case HOTEL_CREATE_REVIEW_RESET:
+      return {};
+    default:
+      return state;
+  }
+};
+
+export const hotelReviewDeleteReducer = (state={ }, action) => {
+  switch(action.type) {
+    case HOTEL_DELETE_REVIEW_REQUEST:
+      return { loading: true };
+    case HOTEL_DELETE_REVIEW_SUCCESS:
+      return { loading: false, success: true };
+    case HOTEL_DELETE_REVIEW_FAIL:
+      return { loading: false, error: action.payload };
+    case HOTEL_DELETE_REVIEW_RESET:
+      return {};
     default:
       return state;
   }

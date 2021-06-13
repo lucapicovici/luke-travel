@@ -8,6 +8,7 @@ import Hotel from '../components/Hotel';
 import Paginate from '../components/Paginate';
 import Meta from '../components/Meta';
 import { listHotels, deleteHotel } from '../store/actions/hotelActions';
+import { HOTEL_DELETE_RESET } from '../store/constants/hotelConstants';
 
 const HotelListAdmin = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1;
@@ -29,7 +30,14 @@ const HotelListAdmin = ({ history, match }) => {
     } else {
       history.push('/login');
     }
-  }, [userInfo, dispatch, history, successDelete, pageNumber]);
+  }, [userInfo, dispatch, history, pageNumber]);
+
+  useEffect(() => {
+    if (successDelete) {
+      dispatch(listHotels(pageNumber));
+      dispatch({ type: HOTEL_DELETE_RESET });
+    }
+  }, [dispatch, successDelete, pageNumber])
 
   const deleteHandler = (id) => {
     if (window.confirm('Delete hotel?')) {
