@@ -133,13 +133,13 @@ const OrderScreen = ({ match, history }) => {
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     Room: {' '}
-                    <Link to={`/hotel/${order.booking.hotel._id}?room=${order.booking.room._id}`}>
+                    <Link to={`/hotels/${order.booking.hotel._id}?room=${order.booking.room._id}`}>
                       <strong>{order.booking.room.name}</strong>
                     </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Hotel: {' '}
-                    <Link to={`/hotel/${order.booking.hotel._id}`}>
+                    <Link to={`/hotels/${order.booking.hotel._id}`}>
                       <strong>{order.booking.hotel.name}</strong>
                     </Link>
                   </ListGroup.Item>

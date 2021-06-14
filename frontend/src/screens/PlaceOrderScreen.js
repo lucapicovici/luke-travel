@@ -34,7 +34,7 @@ const PlaceOrderScreen = ({ history }) => {
 
   useEffect(() => {
     if (success) {
-      history.push(`/order/${order._id}`);
+      history.push(`/orders/${order._id}`);
       dispatch({ type: ORDER_CREATE_RESET });
     }
     // eslint-disable-next-line
@@ -53,6 +53,9 @@ const PlaceOrderScreen = ({ history }) => {
 
   return (
     <>
+      <Link className='btn btn-outline-secondary my-3' to='/payment'>
+        Go Back
+      </Link>
       <Meta title='Place Order' />
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
@@ -80,13 +83,13 @@ const PlaceOrderScreen = ({ history }) => {
                 <ListGroup variant='flush'>
                   <ListGroup.Item>
                     Room: {' '}
-                    <Link to={`/hotel/${cart.booking.hotel._id}?room=${cart.booking.room._id}`}>
+                    <Link to={`/hotels/${cart.booking.hotel._id}?room=${cart.booking.room._id}`}>
                       <strong>{cart.booking.room.name}</strong>
                     </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     Hotel: {' '}
-                    <Link to={`/hotel/${cart.booking.hotel._id}`}>
+                    <Link to={`/hotels/${cart.booking.hotel._id}`}>
                       <strong>{cart.booking.hotel.name}</strong>
                     </Link>
                   </ListGroup.Item>

@@ -33,7 +33,7 @@ const LoginScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <Meta title='Login to Luke Travel' />
-      <h1>Sign In</h1>
+      <h2>Sign In</h2>
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler}>

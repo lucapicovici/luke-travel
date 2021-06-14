@@ -65,7 +65,7 @@ const HotelListAdmin = ({ history, match }) => {
               <Hotel hotel={hotel}/>
             </Col>
             <Col md={3} className='hotelListRightCol'>
-              <LinkContainer to={`/admin/hotel/${hotel._id}/edit`}>
+              <LinkContainer to={`/admin/hotels/${hotel._id}/edit`}>
                 <Button variant='light' className='btn-lg'>
                   <i className='fas fa-edit'></i>
                 </Button>

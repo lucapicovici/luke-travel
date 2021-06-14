@@ -16,6 +16,9 @@ const HotelListScreen = ({ match }) => {
   const hotelList = useSelector(state => state.hotelList);
   const { loading, error, hotels, page, pages } = hotelList;
 
+  const searchCriteria = useSelector(state => state.searchCriteria);
+  const { checkIn, checkOut, adults } = searchCriteria;
+
   useEffect(() => {
     dispatch(listHotels(pageNumber));
   }, [dispatch, pageNumber]);
@@ -29,6 +32,7 @@ const HotelListScreen = ({ match }) => {
       <Message variant='danger'>{error}</Message>
     ) : (
       <>
+      <h5>Showing results for {checkIn} -{'>'} {checkOut} with {adults} adults</h5>
       <Row className='hotelListRow'>
         {hotels.map(hotel => (
           <Col key={hotel._id} className='hotelListCol' md={12} lg={9}>

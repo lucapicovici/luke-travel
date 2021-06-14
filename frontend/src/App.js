@@ -28,20 +28,20 @@ function App() {
           <Route exact path='/' component={HomeScreen} />
           <Route exact path='/hotels' component={HotelListScreen} />
           <Route exact path='/hotels/page/:pageNumber' component={HotelListScreen} />
-          <Route path='/hotel/:id' component={HotelScreen} />
+          <Route path='/hotels/:id' component={HotelScreen} />
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
           <Route path='/shipping' component={ClientScreen} />
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/place-order' component={PlaceOrderScreen} />
-          <Route path='/order/:id' component={OrderScreen} />
-          <Route path='/admin/user-list' component={UserListScreen} />
-          <Route path='/admin/user/:id/edit' component={UserEditScreen} />
-          <Route exact path='/admin/hotel-list' component={HotelListAdminScreen} />
-          <Route exact path='/admin/hotel-list/page/:pageNumber' component={HotelListAdminScreen} />
-          <Route exact path='/admin/hotel/:id/edit' component={HotelEditScreen} />
-          <Route path='/admin/order-list' component={OrderListScreen} />
+          <Route path='/orders/:id' component={OrderScreen} />
+          <Route path='/admin/users' component={UserListScreen} />
+          <Route path='/admin/users/:id/edit' component={UserEditScreen} />
+          <Route exact path='/admin/hotels' component={HotelListAdminScreen} />
+          <Route exact path='/admin/hotels/page/:pageNumber' component={HotelListAdminScreen} />
+          <Route exact path='/admin/hotels/:id/edit' component={HotelEditScreen} />
+          <Route path='/admin/orders' component={OrderListScreen} />
         </Container>
       </main>
       <Footer />

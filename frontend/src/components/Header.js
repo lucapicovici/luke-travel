@@ -34,14 +34,14 @@ const Header = () => {
       <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to='/'>
-            <Navbar.Brand>Luke Travel</Navbar.Brand>        
+            <Navbar.Brand id='navbar-brand'>Luke Travel</Navbar.Brand>        
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
             {bookingExists && (
               <NavDropdown title={`Currently booking: ${booking.room.name}`} id='booking'>
-                <LinkContainer to={`/hotel/${booking.hotel._id}?room=${booking.room._id}`}>
+                <LinkContainer to={`/hotels/${booking.hotel._id}?room=${booking.room._id}`}>
                   <NavDropdown.Item>View room</NavDropdown.Item>
                 </LinkContainer>
                 <LinkContainer to='/login?redirect=shipping'>
@@ -68,13 +68,13 @@ const Header = () => {
             )}
             {userInfo && userInfo.isAdmin && (
               <NavDropdown title='Admin' id='adminMenu'>
-                <LinkContainer to='/admin/user-list'>
+                <LinkContainer to='/admin/users'>
                   <NavDropdown.Item>Users</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/admin/hotel-list'>
+                <LinkContainer to='/admin/hotels'>
                   <NavDropdown.Item>Hotels</NavDropdown.Item>
                 </LinkContainer>
-                <LinkContainer to='/admin/order-list'>
+                <LinkContainer to='/admin/orders'>
                   <NavDropdown.Item>Orders</NavDropdown.Item>
                 </LinkContainer>
               </NavDropdown>

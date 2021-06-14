@@ -20,7 +20,8 @@ import {
   HOTEL_UPDATE_FAIL, 
   HOTEL_UPDATE_REQUEST,
   HOTEL_UPDATE_RESET,
-  HOTEL_UPDATE_SUCCESS
+  HOTEL_UPDATE_SUCCESS,
+  SEARCH_CRITERIA
 } from "../constants/hotelConstants";
 
 export const hotelListReducer = (state={ hotels: [] }, action) => {
@@ -115,6 +116,19 @@ export const hotelReviewDeleteReducer = (state={ }, action) => {
       return { loading: false, error: action.payload };
     case HOTEL_DELETE_REVIEW_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const searchCriteriaReducer = (state={ }, action) => {
+  switch(action.type) {
+    case SEARCH_CRITERIA:
+      return { 
+        checkIn: action.payload.checkIn,
+        checkOut: action.payload.checkOut,
+        adults: action.payload.adults
+       };
     default:
       return state;
   }

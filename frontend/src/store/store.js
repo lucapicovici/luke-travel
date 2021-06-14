@@ -7,7 +7,8 @@ import {
   hotelListReducer, 
   hotelReviewCreateReducer, 
   hotelReviewDeleteReducer, 
-  hotelUpdateReducer
+  hotelUpdateReducer,
+  searchCriteriaReducer
 } from './reducers/hotelReducer';
 import { 
   userDeleteReducer,
@@ -37,6 +38,7 @@ const reducer = combineReducers({
   hotelUpdate: hotelUpdateReducer,
   hotelReviewCreate: hotelReviewCreateReducer,
   hotelReviewDelete: hotelReviewDeleteReducer,
+  searchCriteria: searchCriteriaReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
@@ -68,12 +70,17 @@ const shippingAddressFromStorage = localStorage.getItem('shippingAddress')
   ? JSON.parse(localStorage.getItem('shippingAddress')) 
   : {};
 
+const searchCriteriaFromStorage = localStorage.getItem('searchCriteria')
+  ? JSON.parse(localStorage.getItem('searchCriteria'))
+  : {};
+
 const initialState = {
   userLogin: { userInfo: userInfoFromStorage },
   cart: {
     booking: bookingFromStorage,
     shippingAddress: shippingAddressFromStorage
-  }
+  },
+  searchCriteria: searchCriteriaFromStorage
 };
 
 const middleware = [thunk];

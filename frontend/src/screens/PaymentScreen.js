@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Meta from '../components/Meta';
@@ -25,6 +26,10 @@ const PaymentScreen = ({ history }) => {
   }
 
   return (
+    <>
+    <Link className='btn btn-outline-secondary my-3' to='/shipping'>
+      Go Back
+    </Link>
     <FormContainer>
       <Meta title='Select Payment Method' />
       <CheckoutSteps step1 step2 step3/>
@@ -61,6 +66,7 @@ const PaymentScreen = ({ history }) => {
         </Button>
       </Form>
     </FormContainer>
+    </>
   )
 }
 

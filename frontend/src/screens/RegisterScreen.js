@@ -40,7 +40,7 @@ const RegisterScreen = ({ location, history }) => {
   return (
     <FormContainer>
       <Meta title='Register to Luke Travel' />
-      <h1>Sign Up</h1>
+      <h2>Sign Up</h2>
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {loading && <Loader />}

@@ -30,7 +30,7 @@ const HotelEditScreen = ({ match, history }) => {
   useEffect(() => {
     if (successUpdate) {
       dispatch({ type: HOTEL_UPDATE_RESET });
-      history.push('/admin/hotel-list');
+      history.push('/admin/hotels');
     } else {
       if (hotel._id !== hotelId && !loading) {
         dispatch(listHotelDetails(hotelId));
@@ -104,7 +104,7 @@ const HotelEditScreen = ({ match, history }) => {
   return (
     <>
       <Meta title={`Edit ${hotel.name}`} />
-      <Link to='/admin/hotel-list' className='btn btn-light my-3'>
+      <Link to='/admin/hotels' className='btn btn-light my-3'>
         Go Back
       </Link>
 

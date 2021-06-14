@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import FormContainer from '../components/FormContainer';
 import CheckoutSteps from '../components/CheckoutSteps';
 import Meta from '../components/Meta';
@@ -8,7 +9,7 @@ import { saveShippingAddress } from '../store/actions/cartActions';
 
 const ShippingScreen = ({ history }) => {
   const cart = useSelector(state => state.cart);
-  const { shippingAddress } = cart;
+  const { shippingAddress, booking } = cart;
 
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
@@ -24,6 +25,10 @@ const ShippingScreen = ({ history }) => {
   }
 
   return (
+    <>
+    <Link className='btn btn-outline-secondary my-3' to={`/hotels/${booking.hotel._id}?room=${booking.room._id}`}>
+      Go Back
+    </Link>
     <FormContainer>
       <Meta title='Client Screen' />
       <CheckoutSteps step1 step2 />
@@ -78,6 +83,7 @@ const ShippingScreen = ({ history }) => {
         </Button>
       </Form>
     </FormContainer>
+    </>
   )
 }
 

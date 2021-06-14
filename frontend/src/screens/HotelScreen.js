@@ -14,7 +14,7 @@ import { listHotelDetails, createHotelReview, deleteHotelReview } from '../store
 import { addToCart } from '../store/actions/cartActions';
 import { validateOrder } from '../store/actions/orderActions';
 import { fetchCalendarDaysBookings } from '../store/actions/orderActions';
-import { ORDER_CALENDAR_RESET, ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
+import { ORDER_VALIDATE_RESET } from '../store/constants/orderConstants';
 import initMapQuestMap from '../utils/mapquest';
 import {
   getCurrentDay,
@@ -56,6 +56,9 @@ const HotelScreen = ({ match, history }) => {
   const hotelReviewDelete = useSelector(state => state.hotelReviewDelete);
   const { loading: loadingReviewDelete, success: successReviewDelete, error: errorReviewDelete } = hotelReviewDelete;
 
+  const searchCriteria = useSelector(state => state.searchCriteria);
+  const { checkIn: checkInSearch, checkOut: checkOutSearch, adults: adultsSearch } = searchCriteria;
+
   const [roomChecked, setRoomChecked] = useState('');
   const [roomCheckedDetails, setRoomCheckedDetails] = useState({});
   const [checkIn, setCheckIn] = useState('');
@@ -69,6 +72,11 @@ const HotelScreen = ({ match, history }) => {
       dispatch(listHotelDetails(hotelId));
       dispatch({ type: ORDER_VALIDATE_RESET });
       dispatch({ type: HOTEL_CREATE_REVIEW_RESET });
+      if (checkInSearch && checkOutSearch && adultsSearch) {
+        setCheckIn(checkInSearch);
+        setCheckOut(checkOutSearch);
+        setAdults(adultsSearch);
+      }
     }
 
     if (loading !== undefined && !loading) {
@@ -85,7 +93,7 @@ const HotelScreen = ({ match, history }) => {
         setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
       }
     }
-  }, [dispatch, hotelId, hotel, loading, location]);
+  }, [dispatch, hotelId, hotel, loading, location, checkInSearch, checkOutSearch, adultsSearch]);
 
   useEffect(() => {
     // Recenzii hotel
@@ -124,24 +132,7 @@ const HotelScreen = ({ match, history }) => {
     }
   }, [hotel, loading]);
 
-  useEffect(() => {
-    // const addDaysToDate = (date, days) => {
-    //   let newDate = new Date(date);
-    //   newDate.setDate(newDate.getDate() + days);
-    //   return newDate;
-    // }
-
-    // const getDaysRange = (start, end) => {
-    //   start = new Date(start);
-    //   end = new Date(end);
-    //   let range = 0, currentDate = start;
-    //   while (currentDate < end) {
-    //     range += 1;
-    //     currentDate = addDaysToDate(currentDate, 1);
-    //   }
-    //   return range;
-    // }
-
+  const proceedToCheckout = () => {
     if (successValidate) {
       const booking = {
         checkIn,
@@ -161,17 +152,39 @@ const HotelScreen = ({ match, history }) => {
       dispatch({ type: ORDER_VALIDATE_RESET });
       history.push('/login?redirect=shipping');
     }
-  }, 
-  [
-    dispatch, 
-    successValidate, 
-    checkIn, 
-    checkOut, 
-    adults, 
-    hotel, 
-    roomCheckedDetails, 
-    history
-  ]);
+  }
+
+  // useEffect(() => {
+  //   if (successValidate) {
+  //     const booking = {
+  //       checkIn,
+  //       checkOut,
+  //       adults,
+  //       hotel: {
+  //         _id: hotel._id,
+  //         name: hotel.name
+  //       },
+  //       room: {
+  //         _id: roomCheckedDetails._id,
+  //         name: roomCheckedDetails.name
+  //       },
+  //       price: getDaysRange(checkIn, checkOut) * roomCheckedDetails.price
+  //     }
+  //     dispatch(addToCart(booking));
+  //     dispatch({ type: ORDER_VALIDATE_RESET });
+  //     history.push('/login?redirect=shipping');
+  //   }
+  // }, 
+  // [
+  //   dispatch, 
+  //   successValidate, 
+  //   checkIn, 
+  //   checkOut, 
+  //   adults, 
+  //   hotel, 
+  //   roomCheckedDetails, 
+  //   history
+  // ]);
 
   const findRoomById = id => {
     return hotel.roomTypes.find(room => room._id === id);
@@ -181,19 +194,6 @@ const HotelScreen = ({ match, history }) => {
     setRoomChecked(e.target.value);
     setRoomCheckedDetails(findRoomById(e.target.value));
   }
-
-  // const getCurrentDay = () => {
-  //   const today = new Date();
-  //   return today.toISOString().split('T')[0];
-  // }
-
-  // const getNextDay = (date) => {
-  //   if (date) {
-  //     date = new Date(date);
-  //     date.setDate(date.getDate() + 1);
-  //     return date.toISOString().split('T')[0];
-  //   }
-  // }
 
   // Verifica disponibilitatea camerei prin apel API
   const checkAvailability = (e) => {
@@ -264,7 +264,7 @@ const HotelScreen = ({ match, history }) => {
           </div>
 
           <div style={{alignItems: 'center', display: 'flex'}}>
-            <RatingNumber>{hotel.rating}</RatingNumber>
+            <RatingNumber>{hotel.rating.toFixed(1)}</RatingNumber>
             <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
           </div>
         </Col>
@@ -370,8 +370,23 @@ const HotelScreen = ({ match, history }) => {
         <Col lg={4}>
           {loadingValidate ? (
               <Loader />
-            ) : errorValidate && (
-              <Message variant='danger'>{errorValidate}</Message>
+            ) : errorValidate ? (
+              <Message 
+                variant='danger' 
+                style={{marginTop: '112px', height: '36.5px', display: 'flex', alignItems: 'center'}}
+              >
+                {errorValidate}
+              </Message>
+            ) : successValidate && (
+              <Message style={{marginTop: '112px', height: '36.5px', display: 'flex', alignItems: 'center'}}>
+                Room Available.&nbsp;Proceed to&nbsp;
+                <span 
+                  onClick={() => proceedToCheckout()}
+                  style={{textDecoration: 'underline', cursor: 'pointer'}}
+                >
+                  Checkout
+                </span>
+              </Message>
           )}
         </Col>
         <Col md={8} lg={5}>
