@@ -28,7 +28,7 @@ function App() {
           <Route exact path='/' component={HomeScreen} />
           <Route exact path='/hotels' component={HotelListScreen} />
           <Route exact path='/hotels/page/:pageNumber' component={HotelListScreen} />
-          <Route path='/hotels/:id' component={HotelScreen} />
+          <Route exact path='/hotels/:id' component={HotelScreen} />
           <Route path='/login' component={LoginScreen} />
           <Route path='/register' component={RegisterScreen} />
           <Route path='/profile' component={ProfileScreen} />
@@ -36,12 +36,12 @@ function App() {
           <Route path='/payment' component={PaymentScreen} />
           <Route path='/place-order' component={PlaceOrderScreen} />
           <Route path='/orders/:id' component={OrderScreen} />
-          <Route path='/admin/users' component={UserListScreen} />
-          <Route path='/admin/users/:id/edit' component={UserEditScreen} />
+          <Route exact path='/admin/users' component={UserListScreen} />
+          <Route exact path='/admin/users/:id/edit' component={UserEditScreen} />
           <Route exact path='/admin/hotels' component={HotelListAdminScreen} />
           <Route exact path='/admin/hotels/page/:pageNumber' component={HotelListAdminScreen} />
           <Route exact path='/admin/hotels/:id/edit' component={HotelEditScreen} />
-          <Route path='/admin/orders' component={OrderListScreen} />
+          <Route exact path='/admin/orders' component={OrderListScreen} />
         </Container>
       </main>
       <Footer />

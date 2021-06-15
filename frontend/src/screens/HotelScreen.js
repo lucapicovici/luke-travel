@@ -264,7 +264,7 @@ const HotelScreen = ({ match, history }) => {
           </div>
 
           <div style={{alignItems: 'center', display: 'flex'}}>
-            <RatingNumber>{hotel.rating.toFixed(1)}</RatingNumber>
+            <RatingNumber>{hotel.rating && hotel.rating.toFixed(1)}</RatingNumber>
             <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
           </div>
         </Col>
@@ -408,12 +408,12 @@ const HotelScreen = ({ match, history }) => {
         </Col>
         <Col md={6}>
           <h5>Reviews</h5>
-          {hotel.reviews.length === 0 && <Message>No Reviews</Message>}
+          {hotel.reviews && hotel.reviews.length === 0 && <Message>No Reviews</Message>}
           {userInfo && userInfo.isAdmin && errorReviewDelete && (
             <Message variant='danger'>{errorReviewDelete}</Message>
           )}
           <ListGroup variant='flush'>
-            {hotel.reviews.map(review => (
+            {hotel.reviews && hotel.reviews.map(review => (
               <ListGroup.Item key={review._id}>
                 {userInfo && userInfo.isAdmin ? (
                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
