@@ -27,7 +27,7 @@ const getCalendarBookings = async(dataCalendar, daysBookings) => {
 
 const findObject = async(daysBookings, date) => {
   for (let i = 0; i < daysBookings.length; i++) {
-    if (daysBookings[i].date && daysBookings[i].date.toISOString() === date.toISOString()) {
+    if (daysBookings[i].date?.toISOString() === date.toISOString()) {
       return i;
     }
   }

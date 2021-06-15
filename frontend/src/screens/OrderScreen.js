@@ -22,7 +22,7 @@ const OrderScreen = ({ match, history }) => {
   const { order, loading, error } = orderDetails;
 
   const orderPay = useSelector(state => state.orderPay);
-  const { loading: loadingPay, success: successPay } = orderPay;
+  const { loading: loadingPay, success: successPay, error: errorPay } = orderPay;
 
   const orderDeliver = useSelector(state => state.orderDeliver);
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver;
@@ -195,7 +195,7 @@ const OrderScreen = ({ match, history }) => {
               )}
 
               {loadingDeliver && <Loader />}
-              {userInfo && userInfo.isAdmin && order.isPaid && !order.isDelivered && (
+              {userInfo?.isAdmin && order.isPaid && !order.isDelivered && (
                 <ListGroup.Item>
                   <Button type='button' className='btn btn-block' onClick={deliverHandler}>
                     Mark As Delivered
@@ -205,9 +205,12 @@ const OrderScreen = ({ match, history }) => {
                     
             </ListGroup>
           </Card>
+          
+          {errorPay && <Message variant='danger'>{errorPay}</Message>}
+
         </Col>
       </Row>
     </>
 }
 
-export default OrderScreen
+export default OrderScreen;

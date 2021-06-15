@@ -114,9 +114,6 @@ hotelSchema.pre('save', async function(next) {
     country: loc[0].countryCode
   }
 
-  // Stergerea adresei din baza de date
-  // this.address = undefined;
-
   next();
 });
 

@@ -164,4 +164,4 @@ const PlaceOrderScreen = ({ history }) => {
   )
 }
 
-export default PlaceOrderScreen
+export default PlaceOrderScreen;

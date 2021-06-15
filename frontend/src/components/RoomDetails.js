@@ -19,7 +19,7 @@ const RoomDetails = ({ room }) => {
       <ListGroup.Item className='bg-light' key='facilities'>
         Facilities
       </ListGroup.Item>
-      {room.facilities && room.facilities.map((f, idx) => (
+      {room.facilities?.map((f, idx) => (
         <ListGroup.Item key={idx}>
           - {f}
         </ListGroup.Item>

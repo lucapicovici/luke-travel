@@ -25,7 +25,7 @@ const HotelListAdmin = ({ history, match }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo?.isAdmin) {
       dispatch(listHotels(pageNumber));
     } else {
       history.push('/login');

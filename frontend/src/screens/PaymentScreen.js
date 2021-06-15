@@ -70,4 +70,4 @@ const PaymentScreen = ({ history }) => {
   )
 }
 
-export default PaymentScreen
+export default PaymentScreen;

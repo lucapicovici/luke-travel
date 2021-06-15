@@ -28,9 +28,7 @@ import {
 // Redux thunk
 export const login = (email, password) => async(dispatch) => {
   try {
-    dispatch({
-      type: USER_LOGIN_REQUEST
-    });
+    dispatch({  type: USER_LOGIN_REQUEST });
 
     const config = {
       headers: {
@@ -53,10 +51,7 @@ export const login = (email, password) => async(dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -98,10 +93,7 @@ export const register = (name, email, password) => async(dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -129,10 +121,7 @@ export const getUserDetails = id => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -172,10 +161,7 @@ export const updateUserProfile = user => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_PROFILE_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -202,10 +188,7 @@ export const listUsers = () => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -229,10 +212,7 @@ export const deleteUser = (id) => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -258,10 +238,7 @@ export const updateUser = (user) => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };

@@ -17,7 +17,7 @@ const OrderListScreen = ({ history }) => {
   const { userInfo } = userLogin;
 
   useEffect(() => {
-    if (userInfo && userInfo.isAdmin) {
+    if (userInfo?.isAdmin) {
       dispatch(listOrders());
     } else {
       history.push('/login');
@@ -46,7 +46,7 @@ const OrderListScreen = ({ history }) => {
             {orders.map(order => (
               <tr key={order._id}>
                 <td>{order._id}</td>
-                <td>{order.user && order.user.name}</td>
+                <td>{order.user?.name}</td>
                 <td>${order.totalPrice}</td>
                 <td>
                   {order.isPaid ? (

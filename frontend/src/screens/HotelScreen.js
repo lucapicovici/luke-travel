@@ -89,8 +89,8 @@ const HotelScreen = ({ match, history }) => {
         setRoomChecked(hotel.roomTypes[roomQueryIndex]._id);
         setRoomCheckedDetails(hotel.roomTypes[roomQueryIndex]);
       } else {
-        setRoomChecked(hotel.roomTypes && hotel.roomTypes[0]._id);
-        setRoomCheckedDetails(hotel.roomTypes && hotel.roomTypes[0]);
+        setRoomChecked(hotel.roomTypes?.[0]?._id);
+        setRoomCheckedDetails(hotel.roomTypes?.[0]);
       }
     }
   }, [dispatch, hotelId, hotel, loading, location, checkInSearch, checkOutSearch, adultsSearch]);
@@ -124,8 +124,8 @@ const HotelScreen = ({ match, history }) => {
 
   useEffect(() => {
     if (loading !== undefined && !loading) {
-      const lat = hotel.location && hotel.location.coordinates[1];
-      const lng = hotel.location && hotel.location.coordinates[0];
+      const lat = hotel.location?.coordinates[1];
+      const lng = hotel.location?.coordinates[0];
       const hotelName = hotel.name;
       const hotelType = hotel.type;
       initMapQuestMap(lat, lng, hotelName, hotelType);
@@ -153,38 +153,6 @@ const HotelScreen = ({ match, history }) => {
       history.push('/login?redirect=shipping');
     }
   }
-
-  // useEffect(() => {
-  //   if (successValidate) {
-  //     const booking = {
-  //       checkIn,
-  //       checkOut,
-  //       adults,
-  //       hotel: {
-  //         _id: hotel._id,
-  //         name: hotel.name
-  //       },
-  //       room: {
-  //         _id: roomCheckedDetails._id,
-  //         name: roomCheckedDetails.name
-  //       },
-  //       price: getDaysRange(checkIn, checkOut) * roomCheckedDetails.price
-  //     }
-  //     dispatch(addToCart(booking));
-  //     dispatch({ type: ORDER_VALIDATE_RESET });
-  //     history.push('/login?redirect=shipping');
-  //   }
-  // }, 
-  // [
-  //   dispatch, 
-  //   successValidate, 
-  //   checkIn, 
-  //   checkOut, 
-  //   adults, 
-  //   hotel, 
-  //   roomCheckedDetails, 
-  //   history
-  // ]);
 
   const findRoomById = id => {
     return hotel.roomTypes.find(room => room._id === id);
@@ -225,7 +193,8 @@ const HotelScreen = ({ match, history }) => {
   };
 
   const reviewDelete = (reviewId) => {
-    if (userInfo && userInfo.isAdmin) {
+    // Egal cu if (userInfo && userInfo.isAdmin)
+    if (userInfo?.isAdmin) {
       dispatch(deleteHotelReview(hotelId, reviewId));
     }
   }
@@ -264,7 +233,7 @@ const HotelScreen = ({ match, history }) => {
           </div>
 
           <div style={{alignItems: 'center', display: 'flex'}}>
-            <RatingNumber>{hotel.rating && hotel.rating.toFixed(1)}</RatingNumber>
+            <RatingNumber>{hotel.rating?.toFixed(1)}</RatingNumber>
             <Rating value={hotel.rating} text={`${hotel.numReviews} reviews`} />
           </div>
         </Col>
@@ -272,13 +241,13 @@ const HotelScreen = ({ match, history }) => {
       <Row>
         <Col className='hotelScreenAddress'>
           <i className="fas fa-map-marker-alt"></i>
-          <span> {hotel.location && hotel.location.formattedAddress}</span>
+          <span> {hotel.location?.formattedAddress}</span>
         </Col>
       </Row>
       <Row>
         <Col>
           <Carousel interval={3000} pause='hover' className='bg-primary' id='hotelCarousel'>
-            {hotel.images && hotel.images.map(image => (
+            {hotel.images?.map(image => (
               <Carousel.Item key={image._id}>
                 <Image src={image.src} alt={hotel.name} fluid />
               </Carousel.Item>
@@ -295,7 +264,7 @@ const HotelScreen = ({ match, history }) => {
       <Row id='roomArea'>
         <Col md={5} lg={5}>
           <ButtonGroup toggle vertical>
-            {hotel.roomTypes && hotel.roomTypes.map(room => (
+            {hotel.roomTypes?.map(room => (
               <ToggleButton
                 id='roomToggleBtn'
                 key={room._id}
@@ -313,7 +282,7 @@ const HotelScreen = ({ match, history }) => {
         </Col>
         <Col md={7} lg={7}>
           <Carousel interval={2000} pause='hover' className='bg-dark' id='roomCarousel'>
-            {roomCheckedDetails && roomCheckedDetails.images && roomCheckedDetails.images.map(image => (
+            {roomCheckedDetails?.images?.map(image => (
               <Carousel.Item key={image._id}>
                 <Image src={image.src} alt={hotel.name} fluid />
               </Carousel.Item>
@@ -355,11 +324,11 @@ const HotelScreen = ({ match, history }) => {
                 required
                 value={adults}
                 min='1'
-                max={roomCheckedDetails && roomCheckedDetails.peopleCount}
+                max={roomCheckedDetails?.peopleCount}
                 onChange={(e) => setAdults(e.target.value)}
               />
               <Form.Text className="text-muted">
-                Max adults: {roomCheckedDetails && roomCheckedDetails.peopleCount}
+                Max adults: {roomCheckedDetails?.peopleCount}
               </Form.Text>
             </Form.Group>
             <Button type='submit' variant='info'>
@@ -408,14 +377,14 @@ const HotelScreen = ({ match, history }) => {
         </Col>
         <Col md={6}>
           <h5>Reviews</h5>
-          {hotel.reviews && hotel.reviews.length === 0 && <Message>No Reviews</Message>}
-          {userInfo && userInfo.isAdmin && errorReviewDelete && (
+          {hotel.reviews?.length === 0 && <Message>No Reviews</Message>}
+          {userInfo?.isAdmin && errorReviewDelete && (
             <Message variant='danger'>{errorReviewDelete}</Message>
           )}
           <ListGroup variant='flush'>
-            {hotel.reviews && hotel.reviews.map(review => (
+            {hotel.reviews?.map(review => (
               <ListGroup.Item key={review._id}>
-                {userInfo && userInfo.isAdmin ? (
+                {userInfo?.isAdmin ? (
                   <div style={{display: 'flex', justifyContent: 'space-between'}}>
                     <strong>{review.name}</strong>
                     <Button variant='danger' className='btn-sm' onClick={() => reviewDelete(review._id)}>

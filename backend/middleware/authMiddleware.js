@@ -6,10 +6,7 @@ const protect = asyncHandler(async(req, res, next) => {
   let token;
 
   // Verifica daca exista un token in Headers
-  if (
-    req.headers.authorization &&
-    req.headers.authorization.startsWith('Bearer')
-  ) {
+  if (req.headers.authorization?.startsWith('Bearer')) {
     try {
       // Preluare token
       token = req.headers.authorization.split(' ')[1];
@@ -36,7 +33,7 @@ const protect = asyncHandler(async(req, res, next) => {
 });
 
 const admin = asyncHandler(async(req, res, next) => {
-  if (req.user && req.user.isAdmin) {
+  if (req.user?.isAdmin) {
     next();
   } else {
     res.status(401);

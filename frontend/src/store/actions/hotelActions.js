@@ -16,8 +16,7 @@ import {
   HOTEL_CREATE_REVIEW_FAIL,
   HOTEL_DELETE_REVIEW_REQUEST,
   HOTEL_DELETE_REVIEW_SUCCESS,
-  HOTEL_DELETE_REVIEW_FAIL,
-  HOTEL_DATES_REQUEST
+  HOTEL_DELETE_REVIEW_FAIL
 } from '../constants/hotelConstants';
 import axios from 'axios';
 
@@ -34,10 +33,7 @@ export const listHotels = (pageNumber='') => async(dispatch) => {
   } catch (error) {
     dispatch({
       type: HOTEL_LIST_FAIL,
-      payload: 
-        error.response && error.response.data.message 
-        ? error.response.data.message 
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -55,10 +51,7 @@ export const listHotelDetails = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: HOTEL_DETAILS_FAIL,
-      payload: 
-        error.response && error.response.data.message 
-        ? error.response.data.message 
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -81,10 +74,7 @@ export const deleteHotel = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: HOTEL_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     })
   }
 };
@@ -116,10 +106,7 @@ export const updateHotel = (hotel) => async(dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: HOTEL_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -143,10 +130,7 @@ export const createHotelReview = (hotelId, review) => async(dispatch, getState) 
   } catch (error) {
     dispatch({
       type: HOTEL_CREATE_REVIEW_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };
@@ -170,10 +154,7 @@ export const deleteHotelReview = (hotelId, reviewId) => async(dispatch, getState
   } catch (error) {
     dispatch({
       type: HOTEL_DELETE_REVIEW_FAIL,
-      payload:
-        error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
+      payload: error.response?.data.message ?? error.message
     });
   }
 };

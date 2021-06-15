@@ -37,7 +37,7 @@ const HotelEditScreen = ({ match, history }) => {
       } else {
         setName(hotel.name);
         setType(hotel.type);
-        setLocation(hotel.location && hotel.location.formattedAddress);
+        setLocation(hotel.location?.formattedAddress);
         setImages(hotel.images);
         setRooms(hotel.roomTypes);
       }
@@ -164,7 +164,7 @@ const HotelEditScreen = ({ match, history }) => {
                 <Form.Text>Enter each image link like this: a,b,c</Form.Text>
               </Form.Group>
 
-              {hotel.roomTypes && rooms && hotel.roomTypes.map((room, id) => (
+              {rooms && hotel.roomTypes?.map((room, id) => (
                 <>
                 <hr/>
                 <h5>{room.name}</h5>
@@ -174,7 +174,7 @@ const HotelEditScreen = ({ match, history }) => {
                   <Form.Control
                     type='text'
                     placeholder='Enter room name'
-                    value={rooms[id] && rooms[id]['name']}
+                    value={rooms[id]?.['name']}
                     name='name'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -186,7 +186,7 @@ const HotelEditScreen = ({ match, history }) => {
                   <Form.Control
                     type='text'
                     placeholder='Enter room beds info'
-                    value={rooms[id] && rooms[id]['beds']}
+                    value={rooms[id]?.['beds']}
                     name='beds'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -199,7 +199,7 @@ const HotelEditScreen = ({ match, history }) => {
                     type='number'
                     min='1'
                     placeholder='Enter room adults count'
-                    value={rooms[id] && rooms[id]['peopleCount']}
+                    value={rooms[id]?.['peopleCount']}
                     name='peopleCount'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -212,7 +212,7 @@ const HotelEditScreen = ({ match, history }) => {
                     type='number'
                     min='1'
                     placeholder='Enter available rooms for this room type'
-                    value={rooms[id] && rooms[id]['availableRooms']}
+                    value={rooms[id]?.['availableRooms']}
                     name='availableRooms'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -224,7 +224,7 @@ const HotelEditScreen = ({ match, history }) => {
                   <Form.Control
                     type='text'
                     placeholder='Enter room facilities'
-                    value={rooms[id] && rooms[id]['facilities']}
+                    value={rooms[id]?.['facilities']}
                     name='facilities'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -238,7 +238,7 @@ const HotelEditScreen = ({ match, history }) => {
                     type='number'
                     min='0'
                     placeholder='Enter room price'
-                    value={rooms[id] && rooms[id]['price']}
+                    value={rooms[id]?.['price']}
                     name='price'
                     required
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
@@ -250,7 +250,7 @@ const HotelEditScreen = ({ match, history }) => {
                   <Form.Control
                     type='text'
                     placeholder='Enter room images links'
-                    value={rooms[id] && rooms[id]['images'] && handleImagesValue(rooms[id]['images'])}
+                    value={rooms[id]?.['images'] && handleImagesValue(rooms[id]['images'])}
                     name='images'
                     onChange={(e) => handleRoomsChange(id, e.target.name, e.target.value)}
                   ></Form.Control>
