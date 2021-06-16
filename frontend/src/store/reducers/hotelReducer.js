@@ -127,7 +127,8 @@ export const searchCriteriaReducer = (state={ }, action) => {
       return { 
         checkIn: action.payload.checkIn,
         checkOut: action.payload.checkOut,
-        adults: action.payload.adults
+        adults: action.payload.adults,
+        type: action.payload.type
        };
     default:
       return state;

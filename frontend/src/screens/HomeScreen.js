@@ -19,10 +19,11 @@ const HomeScreen = ({ history }) => {
       payload: {
         checkIn,
         checkOut,
-        adults
+        adults,
+        type: 'Hotel'
       }
     });
-    localStorage.setItem('searchCriteria', JSON.stringify({ checkIn, checkOut, adults }));
+    localStorage.setItem('searchCriteria', JSON.stringify({ checkIn, checkOut, adults, type: 'Hotel' }));
     history.push('/hotels');
   }
 

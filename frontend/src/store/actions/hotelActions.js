@@ -20,11 +20,11 @@ import {
 } from '../constants/hotelConstants';
 import axios from 'axios';
 
-export const listHotels = (pageNumber='') => async(dispatch) => {
+export const listHotels = (pageNumber='', type) => async(dispatch) => {
   try {
     dispatch({ type: HOTEL_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/hotels?pageNumber=${pageNumber}`);
+    const { data } = await axios.get(`/api/hotels?pageNumber=${pageNumber}&type=${type}`);
 
     dispatch({
       type: HOTEL_LIST_SUCCESS,
