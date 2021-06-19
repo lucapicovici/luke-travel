@@ -20,7 +20,7 @@ import {
 } from '../constants/hotelConstants';
 import axios from 'axios';
 
-export const listHotels = (pageNumber='', type) => async(dispatch) => {
+export const listHotels = (pageNumber, type) => async(dispatch) => {
   try {
     dispatch({ type: HOTEL_LIST_REQUEST });
 

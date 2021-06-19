@@ -118,9 +118,10 @@ h3 {
 
 .hotelListCard .card-title {
   margin-bottom: 0;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
-  word-break: break-all;
+  word-break: break-word;
+  max-width: 300px;
 }
 
 .hotelListCard .card-title:hover {
@@ -139,8 +140,17 @@ h3 {
 
 @media screen and (max-width: 992px) {
   .hotelListCard .card-title {
+    max-width: 250px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  .hotelListCard .card-title {
+    max-width: 236px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .hotelListCard .card-title {
     font-size: 1em;
-    max-width: 200px;
   }
   .hotelListCard .rating-text {
     display: none;
@@ -180,6 +190,7 @@ h3 {
 #hotelName {
   font-size: 1.5em;
   font-weight: bold;
+  max-width: 800px;
 }
 
 .hotelScreenAddress {
@@ -218,7 +229,7 @@ h3 {
 @media screen and (max-width: 992px) {
   #hotelName {
     font-size: 1.1em;
-    max-width: 100px;
+    max-width: 200px;
     word-break: break-word;
   }
   #hotelCarousel .carousel-item-next,
@@ -231,6 +242,22 @@ h3 {
     margin-bottom: 50px;
   }
 }
+@media screen and (max-width: 500px) {
+  #hotelName {
+    max-width: 100px;
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  #hotelName {
+    max-width: 400px;
+  }
+}
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+  #hotelName {
+    max-width: 620px;
+  }
+}
+
 
 /* -------------------- */
 /* --- Order Screen --- */

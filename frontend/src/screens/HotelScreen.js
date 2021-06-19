@@ -72,11 +72,6 @@ const HotelScreen = ({ match, history }) => {
       dispatch(listHotelDetails(hotelId));
       dispatch({ type: ORDER_VALIDATE_RESET });
       dispatch({ type: HOTEL_CREATE_REVIEW_RESET });
-      if (checkInSearch && checkOutSearch && adultsSearch) {
-        setCheckIn(checkInSearch);
-        setCheckOut(checkOutSearch);
-        setAdults(adultsSearch);
-      }
     }
 
     if (loading !== undefined && !loading) {
@@ -93,7 +88,15 @@ const HotelScreen = ({ match, history }) => {
         setRoomCheckedDetails(hotel.roomTypes?.[0]);
       }
     }
-  }, [dispatch, hotelId, hotel, loading, location, checkInSearch, checkOutSearch, adultsSearch]);
+  }, [dispatch, hotelId, hotel, loading, location]);
+
+  useEffect(() => {
+    if (checkInSearch && checkOutSearch && adultsSearch) {
+      setCheckIn(checkInSearch);
+      setCheckOut(checkOutSearch);
+      // setAdults(adultsSearch);
+    }
+  }, [checkInSearch, checkOutSearch, adultsSearch])
 
   useEffect(() => {
     // Recenzii hotel
