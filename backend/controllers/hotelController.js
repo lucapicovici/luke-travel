@@ -12,14 +12,15 @@ const getHotels = asyncHandler(async(req, res) => {
   const page = Number(req.query.pageNumber) || 1;
 
   // Filtrare in functie de tip
-  const type = req.query.type;
+  const reqQuery = { ...req.query };
+  const removeFields = ['pageNumber'];
 
-  const query = { type }
+  removeFields.forEach(param => delete reqQuery[param]);
   
-  const count = await Hotel.countDocuments(query);
+  const count = await Hotel.countDocuments(reqQuery);
 
   // Cauta toate hotelurile in baza de date
-  const hotels = await Hotel.find(query)
+  const hotels = await Hotel.find(reqQuery)
     .limit(pageSize)
     .skip(pageSize * (page-1));
 

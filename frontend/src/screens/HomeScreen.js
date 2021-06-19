@@ -31,12 +31,12 @@ const HomeScreen = ({ history }) => {
     <>
     <Meta />
     <Row className='homeScreenTitleRow'>
-      <Col>
+      <Col className='homeScreenTitleCol'>
         <h2 id='homeScreenTitleHeader'>When do you want to travel?</h2>
       </Col>
     </Row>
-    <Row className='homeScreenRow'>
-      <Col>
+    <Row>
+      <Col className='homeScreenCol'>
         <Form onSubmit={submitHandler} id='homeScreenForm'>
           <Form.Group id='homeScreenCheckIn'>
             <Form.Label>Check In</Form.Label>

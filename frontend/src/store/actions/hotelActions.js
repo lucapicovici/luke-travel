@@ -24,7 +24,12 @@ export const listHotels = (pageNumber='', type) => async(dispatch) => {
   try {
     dispatch({ type: HOTEL_LIST_REQUEST });
 
-    const { data } = await axios.get(`/api/hotels?pageNumber=${pageNumber}&type=${type}`);
+    let url;
+
+    if (type) url = `/api/hotels?pageNumber=${pageNumber}&type=${type}`;
+    else url = `/api/hotels?pageNumber=${pageNumber}`;
+
+    const { data } = await axios.get(url);
 
     dispatch({
       type: HOTEL_LIST_SUCCESS,

@@ -370,7 +370,7 @@ const HotelScreen = ({ match, history }) => {
         </Col>
       </Row>
       <Row style={{marginBottom: '50px'}}>
-        <Col md={{order: 'last'}}>
+        <Col md={{order: 'last'}} className='roomDetailsCol'>
           {roomCheckedDetails && (
             <RoomDetails room={roomCheckedDetails} />
           )}

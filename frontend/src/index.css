@@ -56,6 +56,21 @@ h3 {
   margin-top: 31px;
 }
 
+@media screen and (max-width: 992px) {
+  #homeScreenTitleHeader {
+    font-size: 1.5em;
+  }
+  #homeScreenForm {
+    flex-direction: column;
+    justify-content: center;
+    width: 250px;
+  }
+  .homeScreenCol {
+    display: flex;
+    justify-content: center;
+  }
+}
+
 /* --- Hotel List --- */
 .hotelListRow {
   flex-direction: column;
@@ -120,6 +135,16 @@ h3 {
 .hotelListCard .type {
   font-size: 0.8em;
   color: grey;
+}
+
+@media screen and (max-width: 992px) {
+  .hotelListCard .card-title {
+    font-size: 1em;
+    max-width: 200px;
+  }
+  .hotelListCard .rating-text {
+    display: none;
+  }
 }
 
 /* -------------------- */
@@ -188,6 +213,23 @@ h3 {
 
 #roomArea > *, #bookingArea > * {
   margin-bottom: 50px;
+}
+
+@media screen and (max-width: 992px) {
+  #hotelName {
+    font-size: 1.1em;
+    max-width: 100px;
+    word-break: break-word;
+  }
+  #hotelCarousel .carousel-item-next,
+  #hotelCarousel .carousel-item-prev,
+  #hotelCarousel .carousel-item.active {
+    display: flex;
+    height: 250px;
+  }
+  .roomDetailsCol {
+    margin-bottom: 50px;
+  }
 }
 
 /* -------------------- */
