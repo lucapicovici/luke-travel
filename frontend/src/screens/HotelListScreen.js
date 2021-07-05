@@ -122,6 +122,7 @@ const HotelListScreen = ({ match, history }) => {
                   >
                     <option value='Hotel'>Hotel</option>
                     <option value='Guest House'>Guest House</option>
+                    <option value='Apartment'>Apartment</option>
                   </Form.Control>
                 </Form.Group>
                 <Button type='submit' variant='info'>

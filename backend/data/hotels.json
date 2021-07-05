@@ -57,207 +57,6 @@
     ]
   },
   {
-    "name": "Dorsett City London1",
-    "type": "Hotel",
-    "address": "9 Aldgate High Street, City of London, London, EC3N 1AH, United Kingdom",
-    "images": [
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"},
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/245/245147790.jpg"}
-    ],
-    "description": "Featuring a garden and views of city, Dorsett City London is a 4-star hotel set in London, an 8-minute walk from Sky Garden. Among the facilities at this property are a 24-hour front desk and a business centre, along with free Wi-Fi throughout the property. The on-site restaurant serves Chinese cuisine.",
-    "amenities": [
-      "Wi-fi",
-      "Hotel Bar",
-      "Fitness Center",
-      "Restaurant"
-    ],
-    "rating": 4,
-    "roomTypes": [
-      {
-        "name": "Superior Double Room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 7,
-        "facilities": [
-          "22 m^2",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/186/186450237.jpg"}
-        ],
-        "price": 139
-      },
-      {
-        "name": "Deluxe room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 5,
-        "facilities": [
-          "22 m^2",
-          "Landmark view",
-          "City view",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"}
-        ],
-        "price": 169
-      }
-    ]
-  },
-  {
-    "name": "Dorsett City London2",
-    "type": "Hotel",
-    "address": "9 Aldgate High Street, City of London, London, EC3N 1AH, United Kingdom",
-    "images": [
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"},
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/245/245147790.jpg"}
-    ],
-    "description": "Featuring a garden and views of city, Dorsett City London is a 4-star hotel set in London, an 8-minute walk from Sky Garden. Among the facilities at this property are a 24-hour front desk and a business centre, along with free Wi-Fi throughout the property. The on-site restaurant serves Chinese cuisine.",
-    "amenities": [
-      "Wi-fi",
-      "Hotel Bar",
-      "Fitness Center",
-      "Restaurant"
-    ],
-    "rating": 4,
-    "roomTypes": [
-      {
-        "name": "Superior Double Room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 7,
-        "facilities": [
-          "22 m^2",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/186/186450237.jpg"}
-        ],
-        "price": 139
-      },
-      {
-        "name": "Deluxe room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 5,
-        "facilities": [
-          "22 m^2",
-          "Landmark view",
-          "City view",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"}
-        ],
-        "price": 169
-      }
-    ]
-  },
-  {
-    "name": "Dorsett City London3",
-    "type": "Hotel",
-    "address": "9 Aldgate High Street, City of London, London, EC3N 1AH, United Kingdom",
-    "images": [
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"},
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/245/245147790.jpg"}
-    ],
-    "description": "Featuring a garden and views of city, Dorsett City London is a 4-star hotel set in London, an 8-minute walk from Sky Garden. Among the facilities at this property are a 24-hour front desk and a business centre, along with free Wi-Fi throughout the property. The on-site restaurant serves Chinese cuisine.",
-    "amenities": [
-      "Wi-fi",
-      "Hotel Bar",
-      "Fitness Center",
-      "Restaurant"
-    ],
-    "rating": 4,
-    "roomTypes": [
-      {
-        "name": "Superior Double Room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 7,
-        "facilities": [
-          "22 m^2",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/186/186450237.jpg"}
-        ],
-        "price": 139
-      },
-      {
-        "name": "Deluxe room",
-        "beds": "1 large double bed",
-        "peopleCount": 2,
-        "availableRooms": 5,
-        "facilities": [
-          "22 m^2",
-          "Landmark view",
-          "City view",
-          "Air conditioning",
-          "Minibar",
-          "Soundproofing",
-          "Wi-Fi",
-          "Private bathroom"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/130/130867441.jpg"}
-        ],
-        "price": 169
-      }
-    ]
-  },
-  {
-    "name": "Tower Bridge Rooms",
-    "type": "Guest House",
-    "address": "Tranton road, Southwark, London, SE16 4SE, United Kingdom",
-    "images": [
-      {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/248/248297029.jpg"}
-    ],
-    "description": "Ideally located in the Southwark district of London, Tower Bridge Rooms is set 1.5 km from Tower Bridge, 2.6 km from London Bridge and 2.6 km from Sky Garden. The property is around 2.7 km from Borough Market, 3.4 km from Tower of London and 3.9 km from St Paul's Cathedral. The accommodation offers a shared kitchen and free WiFi throughout the property.",
-    "amenities": [
-      "Wi-fi",
-      "Heating"
-    ],
-    "rating": 4.5,
-    "roomTypes": [
-      {
-        "name": "Double room",
-        "beds": "1 double bed",
-        "peopleCount": 2,
-        "availableRooms": 3,
-        "facilities": [
-          "15 m^2",
-          "Wi-Fi"
-        ],
-        "images": [
-          {"src": "https://r-cf.bstatic.com/images/hotel/max1280x900/243/243393380.jpg"}
-        ],
-        "price": 25
-      }
-    ]
-  },
-  {
     "name": "Eden Plaza Kensington",
     "type": "Hotel",
     "address": "68-69 Queensgate, Kensington and Chelsea, London, SW7 5JT, United Kingdom",
@@ -354,6 +153,265 @@
           {"src": "/images/eden-46322428.jpg"}
         ],
         "price": 75
+      }
+    ]
+  },
+  {
+    "name": "Hotel Rainer",
+    "type": "Hotel",
+    "address": "Bisericii Romane 124, 500168 Braşov, Romania",
+    "images": [
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922926.jpg?k=0965c5ffffe085149329a6b8874464ba0d76f7a7111a2a5248d6743ea5b94ce2&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922923.jpg?k=3574bd40d78c59c83b45c4ce181b4600e7c7b58be82f72ea91ac3406324afb9c&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922927.jpg?k=1c28dc221f8488d4c172664ead8680049bdcb4bdd6829336c4c85ad7952ec837&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922772.jpg?k=f346e57cac82c6715ac7470de905c762cfa748d19dc1d2c2da710822f3acc5b4&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922772.jpg?k=f346e57cac82c6715ac7470de905c762cfa748d19dc1d2c2da710822f3acc5b4&o=&hp=1"}
+    ],
+    "description": "Situated only 5 minutes by car from the centre of Brasov, Hotel Rainer enjoys a pleasant and quiet location with good connections to both the old town and the commercial centre.",
+    "amenities": [
+      "Wi-fi",
+      "Hotel Bar",
+      "Garden",
+      "Non-smoking rooms"
+    ],
+    "rating": 4.5,
+    "roomTypes": [
+      {
+        "name": "Standard Double Room",
+        "beds": "1 large double bed",
+        "peopleCount": 2,
+        "availableRooms": 7,
+        "facilities": [
+          "22 m^2",
+          "Air conditioning",
+          "Soundproofing",
+          "Wi-Fi",
+          "Private bathroom"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922949.jpg?k=90511148dd50166da4b60a39f42aa3d588180a554e03f4e8c23f55994f950e2a&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922921.jpg?k=063fe76f4e18111f8dad64ff314b08520c1f49cd681a1beae2b267faea8d4bb4&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922920.jpg?k=5848cc94fd521ca704689d21f6be00884de10a5d77d8a7b42010db80839ccbb4&o="}
+        ],
+        "price": 59
+      },
+      {
+        "name": "Superior Double Room",
+        "beds": "1 large double bed",
+        "peopleCount": 2,
+        "availableRooms": 3,
+        "facilities": [
+          "22 m^2",
+          "Landmark view",
+          "City view",
+          "Air conditioning",
+          "Flat-screen TV",
+          "Wi-Fi",
+          "Private bathroom"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922923.jpg?k=f2291b4d164cb5a201f6d6da9947abf50936a96a4a435d4900660f8f1eb51e0e&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922933.jpg?k=55a9dcfb7b21393afccac6ffb035d4a5cd727241d3f9bf5fa8c01f4496f7d046&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/85922663.jpg?k=62a085beef6f1ad26c5a526305bab66f169eb9eb1388dd9d655f6eee38cb55e4&o="}
+        ],
+        "price": 129
+      }
+    ]
+  },
+  {
+    "name": "Hotel Apollonia",
+    "type": "Hotel",
+    "address": "Str. Neagoe Basarab, nr. 7, 500002 Braşov, Romania",
+    "images": [
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77066986.jpg?k=f9ba97301e015c6099bc888eeb426b8d1560f5beddd07b9000382c1445f2a43f&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/255431486.jpg?k=96da0b8149372479030075b5e181189e2cf487f0d1abecfa1c91ad58753eceb0&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77248019.jpg?k=2cc84d3e11fc693f69d2e65c846dea56f9efa75d3fe973b33ba49ff8f8807dc6&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77067026.jpg?k=cf4e38c9dd33943fd90702e851ae4fc36bc66d73951bcc910a901aa6b3e1721c&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/68874474.jpg?k=76e33c451e5ac935b68aa1c954f2bdcafd91ddbb296e53bd0b0db63fe14f23e2&o=&hp=1"}
+    ],
+    "description": "Offering a central location in Braşov, within a short walking distance of the Old Town, Hotel Apollonia provides rooms with free WiFi. You can start your morning with the buffet breakfast served on site.",
+    "amenities": [
+      "Wi-fi",
+      "Hotel Bar",
+      "Garden",
+      "Pets allowed"
+    ],
+    "rating": 4.6,
+    "roomTypes": [
+      {
+        "name": "Standard Triple Room",
+        "beds": "3 single beds",
+        "peopleCount": 3,
+        "availableRooms": 4,
+        "facilities": [
+          "Hairdryer",
+          "Air conditioning",
+          "Shower",
+          "Wi-Fi",
+          "Private bathroom"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/79349857.jpg?k=ce13a38170b7d060d2213b18ec38f544d2a1e3a9a5c0bbcfc178ccf39e7885ae&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/79349840.jpg?k=51a0922de0ceff198b08be059847897a750ba4cdeae67ec0298b5816c1d690d1&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/79349852.jpg?k=932fcbd916f9dddb7a961f4ee3d9c202f04bb6118db2eda61cec3ffa340d5555&o="}
+        ],
+        "price": 79
+      },
+      {
+        "name": "Double Room",
+        "beds": "2 single beds",
+        "peopleCount": 2,
+        "availableRooms": 7,
+        "facilities": [
+          "Air conditioning",
+          "Flat-screen TV",
+          "Wi-Fi",
+          "Private bathroom"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77066976.jpg?k=e15acbf206d35625fabe8c39bf533a27eb3e8ad2744534953ed75cc07009437e&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/77066975.jpg?k=f46ab80bd4c5ffafbb90362ed17075e279a218a2b69bf167f947ced525f2ff1e&o="}
+        ],
+        "price": 49
+      }
+    ]
+  },
+  {
+    "name": "Pensiunea Riunione",
+    "type": "Guest House",
+    "address": "Strada Closca, Nr. 52, 500040 Braşov, Romania",
+    "images": [
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/22228294.jpg?k=1fc8418f9d6f203211cd48db18d562546058feba80532b4b7cf656c8f4326ca0&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687722.jpg?k=a64b61e3b5d6fcaf732ecde962fbaf56e44a4076cdbb10fe4a1f83449851831d&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/277399335.jpg?k=478ce8d6bb031ebc697fcf9ab75c71eb63298f7f335acd76cec0dda9ae8bdb56&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687612.jpg?k=ef7da0c0c963949a56c60991ff5accf78701388481ba814de6bd7e4fd8ba8e88&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/277399333.jpg?k=027d27e63d22ccc4a22273ed519ac518d1be0e8d812d3523c5357af0402e0503&o=&hp=1"}
+    ],
+    "description": "Pensiunea Riunione is located in Braşov, 1 km from the Council Square and the Black Church, and features accommodation with free WiFi, cable TV and free private parking on site.",
+    "amenities": [
+      "Wi-fi",
+      "Garden",
+      "Airport shuttle"
+    ],
+    "rating": 3.9,
+    "roomTypes": [
+      {
+        "name": "Double Room",
+        "beds": "1 large double bed",
+        "peopleCount": 2,
+        "availableRooms": 4,
+        "facilities": [
+          "Hairdryer",
+          "Air conditioning",
+          "Shower",
+          "Wi-Fi",
+          "Towels"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/277399352.jpg?k=0c707c30af19dd07780406b665d892c97a60ed64b1210e49907628c7b7d694a1&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687612.jpg?k=c18bb86a51b7b2fac88b125eb4cda45a1ce3bc17b63ee2e2dd98cbbd9fed883a&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687424.jpg?k=3978bdac14c1a459f8c96338c2ec806e804ed5bc6451fd91446facdda600247c&o="}
+        ],
+        "price": 65
+      },
+      {
+        "name": "Twin Room",
+        "beds": "2 single beds",
+        "peopleCount": 2,
+        "availableRooms": 6,
+        "facilities": [
+          "Air conditioning",
+          "Flat-screen TV",
+          "Wi-Fi",
+          "Private bathroom"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687426.jpg?k=8bdaf889ca5480f4aebe7d67d7240d1843e3be39d5ad741c982238b550b9922f&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/276687431.jpg?k=8ed454e0ace308d6c3e23b7b0cb7cc7a72ccd3eedf43590d6561c5361c30c2c1&o="}
+        ],
+        "price": 49
+      }
+    ]
+  },
+  {
+    "name": "Maria Apartment",
+    "type": "Apartment",
+    "address": "Strada Republicii nr. 14, 500030 Braşov, Romania",
+    "images": [
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/305485300.jpg?k=84826b070d3b38cc7c198b757246cb18a34ffda2ab96c68c8cba45db9e210ca7&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303194834.jpg?k=8e8531cd274c5b99035a1dceeee1628c5e294dbf29d624d3cdd1670d7a621697&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/306254811.jpg?k=d6743d44c2cf77fe015b4a8ec92e17abf126f59daf63346845479f262146596b&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/204215553.jpg?k=9090ce6060ab35589f6b7054f20eb175be399759ad91821528c4103f58a2f58f&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/204215509.jpg?k=1437ac27900f5b2f4b9c6dcb0328acb9c691c5033624038611fdbed105d0ae3c&o=&hp=1"}
+    ],
+    "description": "The apartment has 1 bedroom, a flat-screen TV with satellite channels, an equipped kitchen with a fridge and an oven, a washing machine, and 1 bathroom with a shower.",
+    "amenities": [
+      "Whole apartment",
+      "Kitchen",
+      "Mountain View"
+    ],
+    "rating": 4.7,
+    "roomTypes": [
+      {
+        "name": "Apartment",
+        "beds": "1 large double bed",
+        "peopleCount": 2,
+        "availableRooms": 1,
+        "facilities": [
+          "Hairdryer",
+          "Air conditioning",
+          "Shower",
+          "Wi-Fi",
+          "Towels"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/197647565.jpg?k=56fa937e1c832e2cc9b4618a6b858d439757759a0372b6d2a7bc90d244ac610b&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/197647554.jpg?k=be8d7c99ca1d8b53927afd6c21036f0ffa602cde10f018ddd60a3f310968d67d&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/305485335.jpg?k=a49cbe8b0563b31a1b42a7b81b8e5e14a74e592c187e19f785362734416272d4&o="}
+        ],
+        "price": 119
+      }
+    ]
+  },
+  {
+    "name": "Anna Apartment",
+    "type": "Apartment",
+    "address": "Bulevardul Victoriei 3 bloc 39 sc. B parter ap. 38, 500214 Braşov",
+    "images": [
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303758604.jpg?k=9992159a5e31b8201612b59eeafc1ec2bc9ffd26acb02509e755d3617b70a78a&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303758601.jpg?k=60d5b9ff6b2bdbc77e10a58c26166798e09f6f332e59e0c49346b4350456e077&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/86065776.jpg?k=37b08a31f235bd387c9060ebb6e994e58dbcc2ffe0b29d14f9ad7388ad09e976&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/254013227.jpg?k=beadf0f09f147cc8fcda73ce89965165e0aef0733af238371c27de031e2beaa2&o=&hp=1"},
+      {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303758600.jpg?k=8e4d9ff2219f94dc1529badf1eb3f19e37d5c5eefe395cc4adbbecbd3c1cfbc2&o=&hp=1"}
+    ],
+    "description": "Anna Apartment is a studio set in Braşov, 2.6 km from Council Square. Free WiFi is offered throughout the property.",
+    "amenities": [
+      "Whole apartment",
+      "Kitchen",
+      "Mountain View",
+      "Washing machine"
+    ],
+    "rating": 2.9,
+    "roomTypes": [
+      {
+        "name": "Studio - Ground Floor",
+        "beds": "1 large double bed",
+        "peopleCount": 2,
+        "availableRooms": 1,
+        "facilities": [
+          "Hairdryer",
+          "Air conditioning",
+          "Shower",
+          "Refrigerator",
+          "Wi-Fi",
+          "Towels"
+        ],
+        "images": [
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/86065789.jpg?k=ea92125cc38ddcdab8908533b71a3662b4e5b961ff34a1bfacc889b3ca32c750&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303758604.jpg?k=b1d8eeb1b9c88a9717560380ed04fad1353e28019a7ad4ed7ff5a7bc02db957a&o="},
+          {"src": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/303758605.jpg?k=03599b5fb548f89f93c2b4cc4e55a6b6eb20a0047cac8dda4f6368675ba1f9ce&o="}
+        ],
+        "price": 89
       }
     ]
   }

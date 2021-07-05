@@ -137,7 +137,7 @@ const ProfileScreen = ({ history }) => {
                   <td>{order.booking.room.name}</td>
                   <td>{order.booking.checkIn.substring(0, 10)}</td>
                   <td>{order.booking.checkOut.substring(0, 10)}</td>
-                  <td>{order.booking.price}</td>
+                  <td>${order.totalPrice}</td>
                   <td>{order.isPaid ? (
                     order.paidAt.substring(0, 10)
                   ) : (

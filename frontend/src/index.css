@@ -241,6 +241,9 @@ h3 {
   .roomDetailsCol {
     margin-bottom: 50px;
   }
+  .alert-danger {
+    margin-top: 0;
+  }
 }
 @media screen and (max-width: 500px) {
   #hotelName {
